@@ -1,0 +1,78 @@
+<div class="disputes-container">
+  <div class="disputes-list">
+    <header class="disputes-header">
+      <div class="header-top">
+        <button type="button" class="menu-button">
+          <span class="sr-only">Menu</span>
+          ☰
+        </button>
+        <h1>Reports</h1>
+        <div class="header-actions">
+          <button type="button" class="search-button">🔍</button>
+          <button type="button" class="help-button">?</button>
+          <button type="button" class="notifications-button">🔔</button>
+          <span class="business-name">J's Skincare Shop</span>
+        </div>
+      </div>
+      
+      <div class="header-filters">
+        <div class="location-filter">
+          <select>
+            <option>31 Locations</option>
+          </select>
+        </div>
+        <div class="date-filter">
+          <input type="text" value="02/13/2023-02/13/2024">
+        </div>
+      </div>
+    </header>
+
+    <div class="disputes-content">
+      <h2 class="disputes-count">{{this.totalDisputes}} TOTAL DISPUTES</h2>
+      
+      <div class="disputes-section">
+        <h3>Open Disputes</h3>
+        <table class="disputes-table">
+          <thead>
+            <tr>
+              <th>Date Disputed</th>
+              <th>Date of Payment</th>
+              <th>Location</th>
+              <th>Dispute Status</th>
+              <th>Respond By</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each @model.disputes as |dispute|}}
+              <tr 
+                class="dispute-row {{if (eq this.selectedDisputeId dispute.id) 'selected'}}"
+                {{on "click" (fn this.selectDispute dispute)}}
+              >
+                <td>{{dispute.dateDisputed}}</td>
+                <td>{{dispute.dateOfPayment}}</td>
+                <td>{{dispute.location}}</td>
+                <td>
+                  <span class="status status-{{lowercase dispute.status}}">
+                    {{#if (eq dispute.status "ACTION_REQUIRED")}}
+                      Action required ⚠️
+                    {{else}}
+                      {{dispute.status}}
+                    {{/if}}
+                  </span>
+                </td>
+                <td>{{dispute.respondBy}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {{#if this.selectedDispute}}
+    <Disputes::DetailBlade 
+      @dispute={{this.selectedDispute}}
+      @onClose={{this.closeDetailBlade}}
+    />
+  {{/if}}
+</div>

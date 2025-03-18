@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - J's Skincare Shop</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .address {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .invoice-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .invoice-details {
+            margin-bottom: 30px;
+        }
+        .invoice-number {
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .appointment-info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">J's Skincare Shop</div>
+        <div class="address">
+            123 Beauty Lane<br>
+            San Francisco, CA 94105<br>
+            (415) 555-0123
+        </div>
+    </div>
+
+    <div class="invoice-title">
+        APPOINTMENT CONFIRMATION & INVOICE
+    </div>
+
+    <div class="invoice-details">
+        <p class="invoice-number">Invoice #: INV-2024-0215</p>
+        <p>Date: February 15, 2024</p>
+        <p>Due Date: February 15, 2024 (Due at time of service)</p>
+    </div>
+
+    <div class="customer-info">
+        <p>
+            <strong>Bill To:</strong><br>
+            Sarah Johnson<br>
+            sarah.johnson@email.com<br>
+            (415) 555-9876
+        </p>
+    </div>
+
+    <div class="appointment-info">
+        <h3>Appointment Details</h3>
+        <p>
+            Date: February 15, 2024<br>
+            Time: 2:00 PM<br>
+            Provider: Jennifer Smith, Licensed Esthetician<br>
+            Location: San Francisco Store
+        </p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Advanced Facial Treatment</td>
+                <td>Premium skincare treatment including deep cleansing, exfoliation, and mask</td>
+                <td>90 min</td>
+                <td>$200.00</td>
+            </tr>
+            <tr>
+                <td>Add-on: LED Therapy</td>
+                <td>Anti-aging light therapy treatment</td>
+                <td>15 min</td>
+                <td>$50.00</td>
+            </tr>
+            <tr>
+                <td colspan="3">Subtotal</td>
+                <td>$250.00</td>
+            </tr>
+            <tr>
+                <td colspan="3">Tax (8.5%)</td>
+                <td>$21.25</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="3">Total Due</td>
+                <td>$271.25</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p><strong>Cancellation Policy:</strong> 24-hour notice required for cancellations. Late cancellations or no-shows will be charged 50% of service price.</p>
+        <p>Please arrive 10 minutes before your scheduled appointment time.</p>
+        <p>For questions about this invoice, please contact us at (415) 555-0123</p>
+    </div>
+</body>
+</html>

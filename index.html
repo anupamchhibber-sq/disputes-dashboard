@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disputes Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f1f1f;
+            line-height: 1.4;
+            background: #FAFAFA;
+        }
+
+        /* Main Layout */
+        .disputes-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* List Section */
+        .disputes-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background: white;
+        }
+
+        .disputes-header {
+            padding: 16px;
+            border-bottom: 1px solid #e6e6e6;
+            background: white;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .menu-button {
+            padding: 8px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .seller-select {
+            padding: 8px 12px;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #1f1f1f;
+            background: white;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .seller-select:hover {
+            border-color: #0B74FF;
+        }
+
+        .header-filters {
+            display: flex;
+            gap: 16px;
+        }
+
+        .header-filters select,
+        .header-filters input {
+            padding: 8px;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+
+        .disputes-content {
+            padding: 24px;
+            flex: 1;
+            overflow: auto;
+        }
+
+        .disputes-count {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .disputes-section {
+            margin-bottom: 32px;
+        }
+
+        .disputes-section h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        /* Table Styles */
+        .disputes-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .disputes-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            background: #f7f7f7;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .disputes-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e6e6e6;
+            font-size: 14px;
+        }
+
+        .disputes-table tr {
+            cursor: pointer;
+        }
+
+        .disputes-table tr:hover {
+            background: #f7f7f7;
+        }
+
+        .disputes-table tr.selected {
+            background: #e8f2ff;
+        }
+
+        .status-under_bank_review {
+            color: #666;
+        }
+
+        .status-action_required {
+            color: #c23d4b;
+        }
+
+        .resolution-success {
+            color: #1ea672;
+        }
+
+        .resolution-failure {
+            color: #c23d4b;
+        }
+
+        /* Detail Blade */
+        .dispute-detail-blade {
+            width: 400px;
+            background: white;
+            border-left: 1px solid #e6e6e6;
+            display: none;
+        }
+
+        .dispute-detail-blade.visible {
+            display: block;
+        }
+
+        .blade-header {
+            padding: 16px;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blade-header h2 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .blade-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .close-button {
+            font-size: 24px;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .more-button {
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .blade-content {
+            height: calc(100vh - 57px);
+            overflow-y: auto;
+        }
+
+        .challenge-banner {
+            background: #1F1F1F;
+            padding: 16px;
+            margin: 16px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .challenge-banner p {
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .challenge-banner .days-left {
+            font-weight: 500;
+        }
+
+        .challenge-banner .description {
+            opacity: 0.8;
+        }
+
+        .challenge-button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .challenge-button.primary {
+            background: #0B74FF;
+            color: white;
+            border: none;
+        }
+
+        .challenge-button.secondary {
+            background: white;
+            color: black;
+            border: none;
+        }
+
+        .dispute-details {
+            padding: 16px;
+        }
+
+        .dispute-amount {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .detail-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-section h4 {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            font-weight: normal;
+        }
+
+        .amount-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .amount-row > div {
+            flex: 1;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .unknown-badge {
+            background: #f0f0f0;
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .timeline {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e6e6e6;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .timeline-header h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .learn-more {
+            color: #0B74FF;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .timeline-event {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .event-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f7f7f7;
+            flex-shrink: 0;
+        }
+
+        .event-details h4 {
+            text-transform: none;
+            font-weight: 500;
+            color: #1f1f1f;
+            margin-bottom: 4px;
+        }
+
+        .event-details p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .event-details time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .amount-large {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Interstitial Styles */
+        .interstitial-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            display: none;
+            z-index: 2000;
+        }
+
+        .interstitial-overlay.visible {
+            display: block;
+        }
+
+        .interstitial {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .interstitial-header {
+            background: white;
+            padding: 24px;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            align-items: center;
+        }
+
+        .interstitial-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            color: #1f1f1f;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+
+        .interstitial-close:hover {
+            background: #f7f7f7;
+        }
+
+        .interstitial h1 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .interstitial-next {
+            margin-left: auto;
+            background: #0B74FF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .interstitial-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            max-width: 640px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .interstitial h2 {
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 16px;
+            color: #1f1f1f;
+        }
+
+        .evidence-note {
+            font-size: 14px;
+            color: #1f1f1f;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .evidence-note a {
+            color: #0B74FF;
+            text-decoration: none;
+        }
+
+        .evidence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .evidence-item {
+            padding: 16px;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            cursor: pointer;
+        }
+
+        .evidence-item:hover {
+            background: #f7f7f7;
+        }
+
+        .evidence-item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .evidence-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .evidence-details {
+            font-size: 14px;
+            color: #1f1f1f;
+        }
+
+        .evidence-details .uploaded-by {
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .key-evidence {
+            color: #0B74FF;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #E8F2FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="interstitial-overlay" id="interstitialOverlay">
+        <div class="interstitial">
+            <div class="interstitial-header">
+                <button class="interstitial-close" onclick="closeInterstitial()">×</button>
+                <h1>Challenge dispute</h1>
+                <button class="interstitial-next" onclick="goToSSP()">Next</button>
+            </div>
+            
+            <div class="interstitial-content">
+                <h2>Here's the evidence we collected on your behalf</h2>
+                
+                <p class="evidence-note">
+                    Want to add additional evidence? Just make sure it's <a href="#">the kind that card networks accept</a>.
+                </p>
+                
+                <div class="evidence-list">
+                    <div class="evidence-item" onclick="openEvidence('invoice')">
+                        <div class="evidence-item-left">
+                            <div class="evidence-icon">📄</div>
+                            <div class="evidence-details">
+                                <div>Goods and services confirmation</div>
+                                <div class="uploaded-by">1 file uploaded by Square</div>
+                            </div>
+                        </div>
+                        <div class="key-evidence">Key evidence</div>
+                    </div>
+                    
+                    <div class="evidence-item" onclick="openEvidence('contract')">
+                        <div class="evidence-item-left">
+                            <div class="evidence-icon">📄</div>
+                            <div class="evidence-details">
+                                <div>Service agreement</div>
+                                <div class="uploaded-by">1 file uploaded by Square</div>
+                            </div>
+                        </div>
+                        <div class="key-evidence">Key evidence</div>
+                    </div>
+                    
+                    <div class="evidence-item" onclick="openEvidence('invoice')">
+                        <div class="evidence-item-left">
+                            <div class="evidence-icon">📄</div>
+                            <div class="evidence-details">
+                                <div>Invoice</div>
+                                <div class="uploaded-by">1 file uploaded by Square</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="evidence-item" onclick="openEvidence('receipt')">
+                        <div class="evidence-item-left">
+                            <div class="evidence-icon">📄</div>
+                            <div class="evidence-details">
+                                <div>Receipt</div>
+                                <div class="uploaded-by">1 file uploaded by Square</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="disputes-container">
+        <div class="disputes-list">
+            <header class="disputes-header">
+                <div class="header-top">
+                    <button type="button" class="menu-button">☰</button>
+                    <h1>Reports</h1>
+                    <div class="header-actions">
+                        <button type="button">🔍</button>
+                        <button type="button">?</button>
+                        <button type="button">🔔</button>
+                        <select id="sellerSelect" class="seller-select">
+                            <!-- Sellers will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="header-filters">
+                    <div class="location-filter">
+                        <select>
+                            <option>31 Locations</option>
+                        </select>
+                    </div>
+                    <div class="date-filter">
+                        <input type="text" value="09/26/2023-09/26/2024">
+                    </div>
+                </div>
+            </header>
+
+            <div class="disputes-content">
+                <h2 class="disputes-count">30 TOTAL DISPUTES</h2>
+                
+                <div class="disputes-section">
+                    <h3>Open Disputes</h3>
+                    <table class="disputes-table">
+                        <thead>
+                            <tr>
+                                <th>Date Disputed</th>
+                                <th>Date of Payment</th>
+                                <th>Location</th>
+                                <th>Amount</th>
+                                <th>Dispute Status</th>
+                                <th>Respond By</th>
+                            </tr>
+                        </thead>
+                        <tbody id="openDisputesTable">
+                            <!-- Open disputes will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="disputes-section">
+                    <h3>Dispute History</h3>
+                    <table class="disputes-table">
+                        <thead>
+                            <tr>
+                                <th>Date Disputed</th>
+                                <th>Date of Payment</th>
+                                <th>Location</th>
+                                <th>Amount</th>
+                                <th>Resolution</th>
+                            </tr>
+                        </thead>
+                        <tbody id="disputeHistoryTable">
+                            <!-- Dispute history will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="detailBlade" class="dispute-detail-blade">
+            <header class="blade-header">
+                <h2>Payment dispute</h2>
+                <div class="blade-actions">
+                    <button type="button" class="more-button">⋮</button>
+                    <button type="button" class="close-button" onclick="closeDetailBlade()">×</button>
+                </div>
+            </header>
+
+            <div class="blade-content">
+                <!-- Content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                month: '2-digit',
+                day: '2-digit',
+                year: 'numeric'
+            });
+        }
+
+        function formatMoney(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2
+            }).format(amount);
+        }
+
+        function renderTables() {
+            const disputes = mockData.disputes;
+            
+            // Update total count
+            document.querySelector('.disputes-count').textContent = 
+                `${disputes.open.length + disputes.history.length} TOTAL DISPUTES`;
+
+            // Render open disputes
+            const openTable = document.getElementById('openDisputesTable');
+            openTable.innerHTML = disputes.open.map(dispute => `
+                <tr class="${dispute.id === selectedDisputeId ? 'selected' : ''}" 
+                    onclick="selectDispute('${dispute.id}')">
+                    <td>${formatDate(dispute.dateDisputed)}</td>
+                    <td>${formatDate(dispute.dateOfPayment)}</td>
+                    <td>${dispute.location}</td>
+                    <td>${formatMoney(dispute.amount)}</td>
+                    <td>
+                        <span class="status-${dispute.status.toLowerCase().replace(' ', '_')}">
+                            ${dispute.status}
+                        </span>
+                    </td>
+                    <td>${dispute.respondBy ? formatDate(dispute.respondBy) : '—'}</td>
+                </tr>
+            `).join('');
+
+            // Render dispute history
+            const historyTable = document.getElementById('disputeHistoryTable');
+            historyTable.innerHTML = disputes.history.map(dispute => `
+                <tr class="${dispute.id === selectedDisputeId ? 'selected' : ''}"
+                    onclick="selectDispute('${dispute.id}')">
+                    <td>${formatDate(dispute.dateDisputed)}</td>
+                    <td>${formatDate(dispute.dateOfPayment)}</td>
+                    <td>${dispute.location}</td>
+                    <td>${formatMoney(dispute.amount)}</td>
+                    <td>
+                        <span class="resolution-${dispute.resolution.includes('your favor') ? 'success' : 'failure'}">
+                            ${dispute.resolution}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderDetailBlade() {
+            const blade = document.getElementById('detailBlade');
+            const content = blade.querySelector('.blade-content');
+            const dispute = mockData.selectedDispute;
+            
+            content.innerHTML = `
+                <div class="challenge-banner">
+                    <p class="days-left">You have [${dispute.daysLeft || '15'}] days left to challenge this [${formatMoney(dispute.disputedAmount)}] dispute</p>
+                    <p class="description">We've already collected key evidence on your behalf, so all you need to do to challenge this dispute is answer a few questions. You can alternatively accept the dispute, and we'll send the money back to the cardholder's bank.</p>
+                    <button class="challenge-button primary" onclick="showInterstitial()">Challenge dispute</button>
+                    <button class="challenge-button secondary">Accept dispute</button>
+                </div>
+
+                <div class="dispute-details">
+                    <div class="dispute-amount">Dispute for ${formatMoney(dispute.disputedAmount)}</div>
+                    
+                    <div class="detail-section">
+                        <h4>REASON</h4>
+                        <p>${dispute.disputeReason}</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <div class="amount-row">
+                            <div>
+                                <h4>PAYMENT AMOUNT</h4>
+                                <p class="amount-large">${formatMoney(dispute.amount)}</p>
+                            </div>
+                            <div>
+                                <h4>DISPUTED AMOUNT</h4>
+                                <p class="amount-large">${formatMoney(dispute.disputedAmount)}</p>
+                            </div>
+                        </div>
+
+                        <div class="card-details">
+                            <div>
+                                <h4>CARD PRESENT</h4>
+                                <p>${dispute.cardPresent ? 'Yes' : 'No'}</p>
+                            </div>
+                            <span class="unknown-badge">Unknown ⓘ</span>
+                        </div>
+
+                        <div>
+                            <h4>AMOUNT HELD</h4>
+                            <p class="amount-large">${formatMoney(dispute.disputedAmount)}</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-header">
+                            <h3>Timeline</h3>
+                            <a href="#" class="learn-more">Learn more</a>
+                        </div>
+                        ${(dispute.timeline || []).map(event => `
+                            <div class="timeline-event">
+                                <div class="event-icon ${event.type}"></div>
+                                <div class="event-details">
+                                    <h4>${event.title || 'Dispute received'}</h4>
+                                    <p>${event.description || 'Card issuer initiated a dispute'}</p>
+                                    <time>${formatDate(event.date || dispute.dateDisputed)}</time>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            blade.classList.add('visible');
+        }
+
+        function showInterstitial() {
+            document.getElementById('interstitialOverlay').classList.add('visible');
+            document.getElementById('detailBlade').classList.remove('visible');
+        }
+
+        function closeInterstitial() {
+            document.getElementById('interstitialOverlay').classList.remove('visible');
+            document.getElementById('detailBlade').classList.add('visible');
+        }
+
+        function openEvidence(type) {
+            const evidenceLinks = {
+                'invoice': 'evidence/Invoice.pdf',
+                'contract': 'evidence/Contract.html',
+                'receipt': 'evidence/Receipt.html'
+            };
+            
+            const url = evidenceLinks[type];
+            if (url) {
+                window.open(url, '_blank');
+            }
+        }
+
+        function goToSSP() {
+            const currentDisputeId = mockData.getCurrentDisputeId();
+            if (currentDisputeId) {
+                window.location.href = `ssp.html?disputeId=${currentDisputeId}`;
+            }
+        }
+
+        let selectedDisputeId = null;
+
+        function selectDispute(disputeId) {
+            selectedDisputeId = disputeId;
+            renderTables();
+            renderDetailBlade();
+        }
+
+        function closeDetailBlade() {
+            selectedDisputeId = null;
+            document.getElementById('detailBlade').classList.remove('visible');
+            renderTables();
+        }
+
+        function changeSeller(sellerId) {
+            mockData.setSeller(sellerId);
+            selectedDisputeId = null;
+            renderTables();
+            closeDetailBlade();
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Populate seller dropdown
+            const sellerSelect = document.getElementById('sellerSelect');
+            const sellers = mockData.getAllSellers();
+            sellers.forEach(seller => {
+                const option = document.createElement('option');
+                option.value = seller.id;
+                option.textContent = seller.name;
+                sellerSelect.appendChild(option);
+            });
+            
+            // Set initial value
+            sellerSelect.value = 'js_skincare';
+
+            // Add change event listener
+            sellerSelect.addEventListener('change', (e) => {
+                changeSeller(e.target.value);
+            });
+            
+            // Render initial tables
+            renderTables();
+        });
+    </script>
+</body>
+</html>

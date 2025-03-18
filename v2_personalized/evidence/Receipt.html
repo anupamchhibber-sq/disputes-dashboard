@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - J's Skincare Shop</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .address {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .receipt-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .receipt-details {
+            margin-bottom: 30px;
+        }
+        .receipt-number {
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .payment-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">J's Skincare Shop</div>
+        <div class="address">
+            123 Beauty Lane<br>
+            San Francisco, CA 94105<br>
+            (415) 555-0123
+        </div>
+    </div>
+
+    <div class="receipt-title">
+        PAYMENT RECEIPT
+    </div>
+
+    <div class="receipt-details">
+        <p class="receipt-number">Receipt #: INV-2024-0215</p>
+        <p>Date: February 15, 2024</p>
+        <p>Time: 3:30 PM PST</p>
+    </div>
+
+    <div class="customer-info">
+        <p>
+            <strong>Customer:</strong><br>
+            Sarah Johnson<br>
+            sarah.johnson@email.com<br>
+            (415) 555-9876
+        </p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Advanced Facial Treatment</td>
+                <td>Premium skincare treatment including deep cleansing, exfoliation, and mask</td>
+                <td>90 min</td>
+                <td>$200.00</td>
+            </tr>
+            <tr>
+                <td>Add-on: LED Therapy</td>
+                <td>Anti-aging light therapy treatment</td>
+                <td>15 min</td>
+                <td>$50.00</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="3">Total</td>
+                <td>$250.00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="payment-info">
+        <p><strong>Payment Information:</strong></p>
+        <p>
+            Payment Method: Visa ending in 4567<br>
+            Transaction ID: TXN-2024021501<br>
+            Authorization Code: AUTH-789012
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for choosing J's Skincare Shop!</p>
+        <p>This receipt was generated electronically through Square.</p>
+        <p>For questions about this receipt, please contact us at (415) 555-0123</p>
+    </div>
+</body>
+</html>

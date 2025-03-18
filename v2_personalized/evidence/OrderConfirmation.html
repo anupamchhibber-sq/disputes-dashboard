@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Fresh Bites Catering</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .address {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .order-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .delivery-info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+        .status-updates {
+            margin-top: 30px;
+        }
+        .status-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .status-time {
+            width: 150px;
+            color: #666;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Fresh Bites Catering</div>
+        <div class="address">
+            456 Culinary Court<br>
+            San Francisco, CA 94105<br>
+            (415) 555-5678
+        </div>
+    </div>
+
+    <div class="order-title">
+        ORDER CONFIRMATION & DELIVERY DETAILS
+    </div>
+
+    <div class="section">
+        <div class="section-title">Order Information</div>
+        <p>
+            Order #: ORD-2024-0301<br>
+            Date: March 1, 2024<br>
+            Time: 11:30 AM PST
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Customer Details</div>
+        <p>
+            Name: Michael Chen<br>
+            Company: Tech Innovations Inc.<br>
+            Phone: (415) 555-4321<br>
+            Email: m.chen@techinnovations.com
+        </p>
+    </div>
+
+    <div class="delivery-info">
+        <div class="section-title">Delivery Information</div>
+        <p>
+            Delivery Address:<br>
+            Tech Innovations Inc.<br>
+            789 Market Street, Floor 12<br>
+            San Francisco, CA 94103
+        </p>
+        <p>
+            Requested Delivery Time: 12:30 PM<br>
+            Special Instructions: Please deliver to reception on 12th floor
+        </p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Executive Lunch Box</td>
+                <td>25</td>
+                <td>Gourmet sandwich, salad, cookie, and beverage</td>
+                <td>$500.00</td>
+            </tr>
+            <tr>
+                <td>Fruit Platter</td>
+                <td>2</td>
+                <td>Seasonal fresh fruit arrangement</td>
+                <td>$100.00</td>
+            </tr>
+            <tr>
+                <td>Assorted Pastries</td>
+                <td>3 dozen</td>
+                <td>Mix of croissants, muffins, and danish</td>
+                <td>$150.00</td>
+            </tr>
+            <tr>
+                <td colspan="3">Subtotal</td>
+                <td>$750.00</td>
+            </tr>
+            <tr>
+                <td colspan="3">Delivery Fee</td>
+                <td>$50.00</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="3">Total</td>
+                <td>$800.00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="status-updates">
+        <div class="section-title">Order Status Updates</div>
+        <div class="status-item">
+            <div class="status-time">11:30 AM</div>
+            <div>Order received and confirmed</div>
+        </div>
+        <div class="status-item">
+            <div class="status-time">11:45 AM</div>
+            <div>Order preparation started</div>
+        </div>
+        <div class="status-item">
+            <div class="status-time">12:15 PM</div>
+            <div>Order out for delivery</div>
+        </div>
+        <div class="status-item">
+            <div class="status-time">12:35 PM</div>
+            <div>Delivered to Tech Innovations Inc. reception</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for choosing Fresh Bites Catering!</p>
+        <p>This confirmation was generated through Square.</p>
+        <p>Questions about your order? Contact us at (415) 555-5678</p>
+    </div>
+</body>
+</html>

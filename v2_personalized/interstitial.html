@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Dispute - Square Seller Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f1f1f;
+            line-height: 1.4;
+            background: #FAFAFA;
+        }
+
+        .interstitial-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 2000;
+        }
+
+        .interstitial {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .interstitial-header {
+            background: white;
+            padding: 24px;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            align-items: center;
+        }
+
+        .interstitial-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            color: #1f1f1f;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+
+        .interstitial-close:hover {
+            background: #f7f7f7;
+        }
+
+        .interstitial h1 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .interstitial-next {
+            margin-left: auto;
+            background: #0B74FF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .interstitial-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            max-width: 640px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .interstitial h2 {
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 16px;
+            color: #1f1f1f;
+        }
+
+        .evidence-note {
+            font-size: 14px;
+            color: #1f1f1f;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .evidence-note a {
+            color: #0B74FF;
+            text-decoration: none;
+        }
+
+        .evidence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .evidence-item {
+            padding: 16px;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            cursor: pointer;
+        }
+
+        .evidence-item:hover {
+            background: #f7f7f7;
+        }
+
+        .evidence-item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .evidence-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .evidence-details {
+            font-size: 14px;
+            color: #1f1f1f;
+        }
+
+        .evidence-details .uploaded-by {
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .key-evidence {
+            color: #0B74FF;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #E8F2FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="interstitial-overlay">
+        <div class="interstitial">
+            <div class="interstitial-header">
+                <button class="interstitial-close" onclick="goBack()">×</button>
+                <h1>Challenge dispute</h1>
+                <button class="interstitial-next" onclick="goToSSP()">Next</button>
+            </div>
+            
+            <div class="interstitial-content">
+                <h2 id="interstitialTitle">Loading...</h2>
+                <p class="evidence-note" id="interstitialSubtitle">Loading...</p>
+                <div class="evidence-list" id="evidenceList">
+                    <!-- Evidence items will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="evidence-mapping.js"></script>
+    <script src="data.js"></script>
+    <script>
+        // Debug logging function
+        function debug(step, data) {
+            console.log(`[DEBUG ${step}]:`, data);
+        }
+
+        // Navigation functions
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        function goToSSP() {
+            window.location.href = `ssp.html?disputeId=${disputeId}&sellerId=${sellerId}`;
+        }
+
+        // Get dispute ID and seller ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const disputeId = urlParams.get('disputeId');
+        const sellerId = urlParams.get('sellerId');
+
+        debug('URL Params', { disputeId, sellerId });
+
+        if (!disputeId || !sellerId) {
+            console.error('Missing required URL parameters');
+            document.getElementById('interstitialTitle').textContent = 'Error: Missing parameters';
+            document.getElementById('interstitialSubtitle').textContent = 'Please return to the dashboard and try again.';
+            throw new Error('Missing URL parameters');
+        }
+
+        try {
+            // Set the correct seller
+            debug('Setting seller', sellerId);
+            if (!mockData.setSeller(sellerId)) {
+                document.getElementById('interstitialTitle').textContent = 'Error: Invalid seller';
+                document.getElementById('interstitialSubtitle').textContent = 'Please return to the dashboard and try again.';
+                throw new Error('Invalid seller ID');
+            }
+
+            // Find the current dispute
+            const dispute = mockData.disputes.open.find(d => d.id === disputeId);
+            debug('Found dispute', dispute);
+
+            if (!dispute) {
+                console.error('Dispute not found');
+                document.getElementById('interstitialTitle').textContent = 'Error: Dispute not found';
+                document.getElementById('interstitialSubtitle').textContent = 'Please return to the dashboard and try again.';
+                throw new Error('Dispute not found');
+            }
+
+            // Get evidence requirements and language
+            const seller = mockData.currentSeller;
+            debug('Current seller', seller);
+
+            // Get dispute reason in correct format
+            const disputeReason = dispute.disputeReason.toLowerCase();
+            debug('Dispute reason', disputeReason);
+
+            // Get language and requirements
+            const language = {
+                interstitial_title: `Let's review your evidence for this ${disputeReason.replace(/_/g, ' ')} dispute`,
+                evidence_intro: `We've collected key evidence from your ${seller.audience.replace(/_/g, ' ')} business records.`
+            };
+            debug('Language', language);
+
+            const requirements = getEvidenceRequirements(seller.audience, disputeReason);
+            debug('Requirements', requirements);
+
+            if (!requirements || !requirements.square_provided) {
+                console.error('Invalid evidence requirements');
+                document.getElementById('interstitialTitle').textContent = 'Error: Invalid evidence requirements';
+                document.getElementById('interstitialSubtitle').textContent = 'Please contact support.';
+                throw new Error('Invalid evidence requirements');
+            }
+
+            // Update title and subtitle
+            document.getElementById('interstitialTitle').textContent = language.interstitial_title;
+            document.getElementById('interstitialSubtitle').innerHTML = `
+                ${language.evidence_intro}<br>
+                Want to add additional evidence? Just make sure it's <a href="#">the kind that card networks accept</a>.
+            `;
+
+            // Render evidence list
+            const evidenceList = document.getElementById('evidenceList');
+            evidenceList.innerHTML = requirements.square_provided.map(evidence => {
+                const evidenceExists = dispute.evidence && 
+                                     dispute.evidence[evidence.type] && 
+                                     dispute.evidence[evidence.type].exists &&
+                                     evidence.file_exists;
+                
+                debug('Evidence item', { type: evidence.type, exists: evidenceExists });
+                
+                return `
+                    <div class="evidence-item" onclick="openEvidence('${evidence.type}')" 
+                         style="${!evidenceExists ? 'opacity: 0.5; cursor: not-allowed;' : ''}">
+                        <div class="evidence-item-left">
+                            <div class="evidence-icon">📄</div>
+                            <div class="evidence-details">
+                                <div>${evidence.name}</div>
+                                <div class="uploaded-by">
+                                    ${evidenceExists 
+                                        ? `1 file uploaded by Square on ${new Date(dispute.evidence[evidence.type].date).toLocaleDateString()}`
+                                        : 'No file available'}
+                                </div>
+                            </div>
+                        </div>
+                        ${evidence.is_key ? '<div class="key-evidence">Key evidence</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+
+        } catch (error) {
+            console.error('Error in interstitial initialization:', error);
+            document.getElementById('interstitialTitle').textContent = 'Error loading evidence';
+            document.getElementById('interstitialSubtitle').textContent = 'Please try again or contact support.';
+        }
+
+        function openEvidence(type) {
+            try {
+                // Get the current dispute and seller info
+                const dispute = mockData.disputes.open.find(d => d.id === disputeId);
+                const seller = mockData.currentSeller;
+                
+                debug('Opening evidence', { type, dispute, seller });
+                
+                if (!dispute || !dispute.evidence || !dispute.evidence[type]) {
+                    console.log('Evidence not found:', type);
+                    return;
+                }
+
+                // Map evidence types to their file paths based on seller and type
+                const getEvidencePath = (sellerId, type) => {
+                    const paths = {
+                        'js_skincare': {
+                            'appointment_confirmation': 'evidence/appointments/js_skincare_appointment.html',
+                            'payment_receipt': 'evidence/receipts/js_skincare_receipt.html',
+                            'customer_agreement': 'evidence/contracts/js_skincare_agreement.html',
+                            'service_description': 'evidence/descriptions/js_skincare_service.html',
+                            'product_description': 'evidence/descriptions/js_skincare_product.html',
+                            'transaction_details': 'evidence/transactions/js_skincare_details.html'
+                        },
+                        'fresh_bites': {
+                            'order_confirmation': 'evidence/orders/fresh_bites_order.html'
+                        },
+                        'tech_hub': {
+                            'payment_receipt': 'evidence/receipts/tech_hub_receipt.html',
+                            'product_description': 'evidence/descriptions/tech_hub_product.html'
+                        },
+                        'fitness_first': {
+                            'membership_agreement': 'evidence/membership/fitness_first_agreement.html',
+                            'payment_history': 'evidence/membership/fitness_first_payments.html'
+                        }
+                    };
+
+                    // Try to get seller-specific path, fallback to default evidence
+                    const sellerPaths = paths[sellerId] || {};
+                    const evidencePath = sellerPaths[type];
+                    
+                    if (evidencePath) {
+                        return evidencePath;
+                    }
+                    
+                    // Fallback to default evidence files based on type
+                    const defaultPaths = {
+                        'payment_receipt': 'evidence/Receipt.html',
+                        'customer_agreement': 'evidence/Contract.html',
+                        'invoice': 'evidence/Invoice.html'
+                    };
+                    
+                    return defaultPaths[type];
+                };
+
+                const evidencePath = getEvidencePath(sellerId, type);
+                
+                if (evidencePath) {
+                    debug('Opening evidence file', evidencePath);
+                    window.open(evidencePath, '_blank');
+                } else {
+                    console.log('No evidence file mapping found for:', { sellerId, type });
+                }
+            } catch (error) {
+                console.error('Error opening evidence:', error);
+            }
+        }
+    </script>
+</body>
+</html>

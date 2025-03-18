@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Personalization</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .evidence-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .key-evidence {
+            border-left: 4px solid #0B74FF;
+        }
+        select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 200px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #0B74FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0960cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Personalization</h1>
+    
+    <div class="test-section">
+        <h2>1. Select Business Type and Dispute Reason</h2>
+        <div>
+            <label>Business Type:</label><br>
+            <select id="audienceSelect"></select>
+        </div>
+        <div>
+            <label>Dispute Reason:</label><br>
+            <select id="reasonSelect"></select>
+        </div>
+        <button onclick="testPersonalization()">Test</button>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Results</h2>
+        <h3>Language:</h3>
+        <pre id="languageOutput"></pre>
+        
+        <h3>Evidence Requirements:</h3>
+        <div id="evidenceOutput"></div>
+    </div>
+
+    <script src="evidence-mapping.js"></script>
+    <script>
+        // Populate dropdowns
+        const audienceSelect = document.getElementById('audienceSelect');
+        const reasonSelect = document.getElementById('reasonSelect');
+
+        Object.entries(AUDIENCES).forEach(([key, value]) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            audienceSelect.appendChild(option);
+        });
+
+        Object.entries(DISPUTE_REASONS).forEach(([key, value]) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            reasonSelect.appendChild(option);
+        });
+
+        function testPersonalization() {
+            const audience = audienceSelect.value;
+            const reason = reasonSelect.value;
+
+            // Get personalized language
+            const language = getLanguage(audience, reason);
+            document.getElementById('languageOutput').textContent = 
+                JSON.stringify(language, null, 2);
+
+            // Get evidence requirements
+            const requirements = getEvidenceRequirements(audience, reason);
+            const evidenceOutput = document.getElementById('evidenceOutput');
+            evidenceOutput.innerHTML = '';
+
+            // Display Square-provided evidence
+            if (requirements.square_provided?.length > 0) {
+                const squareSection = document.createElement('div');
+                squareSection.innerHTML = '<h4>Square-provided Evidence:</h4>';
+                requirements.square_provided.forEach(evidence => {
+                    const div = document.createElement('div');
+                    div.className = `evidence-item ${evidence.is_key ? 'key-evidence' : ''}`;
+                    div.innerHTML = `
+                        <strong>${evidence.name}</strong><br>
+                        ${evidence.description}
+                        ${evidence.is_key ? '<br><small>(Key Evidence)</small>' : ''}
+                    `;
+                    squareSection.appendChild(div);
+                });
+                evidenceOutput.appendChild(squareSection);
+            }
+
+            // Display merchant-provided evidence
+            if (requirements.merchant_provided?.length > 0) {
+                const merchantSection = document.createElement('div');
+                merchantSection.innerHTML = '<h4>Merchant-provided Evidence:</h4>';
+                requirements.merchant_provided.forEach(evidence => {
+                    const div = document.createElement('div');
+                    div.className = `evidence-item ${evidence.is_key ? 'key-evidence' : ''}`;
+                    div.innerHTML = `
+                        <strong>${evidence.name}</strong><br>
+                        ${evidence.description}<br>
+                        <small>${evidence.help_text}</small>
+                        ${evidence.is_key ? '<br><small>(Key Evidence)</small>' : ''}
+                    `;
+                    merchantSection.appendChild(div);
+                });
+                evidenceOutput.appendChild(merchantSection);
+            }
+        }
+
+        // Initial test
+        testPersonalization();
+    </script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disputes Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f1f1f;
+            line-height: 1.4;
+            background: #FAFAFA;
+        }
+
+        /* Main Layout */
+        .disputes-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* List Section */
+        .disputes-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background: white;
+            transition: margin-right 0.3s ease;
+        }
+
+        .disputes-list.blade-open {
+            margin-right: 400px;
+        }
+
+        .disputes-header {
+            padding: 16px;
+            border-bottom: 1px solid #e6e6e6;
+            background: white;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .menu-button {
+            padding: 8px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .seller-select {
+            padding: 8px 12px;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #1f1f1f;
+            background: white;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .seller-select:hover {
+            border-color: #0B74FF;
+        }
+
+        .header-filters {
+            display: flex;
+            gap: 16px;
+        }
+
+        .header-filters select,
+        .header-filters input {
+            padding: 8px;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+
+        .disputes-content {
+            padding: 24px;
+            flex: 1;
+            overflow: auto;
+        }
+
+        .disputes-count {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .disputes-section {
+            margin-bottom: 32px;
+        }
+
+        .disputes-section h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        /* Table Styles */
+        .disputes-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .disputes-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            background: #f7f7f7;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .disputes-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e6e6e6;
+            font-size: 14px;
+        }
+
+        .disputes-table tr {
+            cursor: pointer;
+        }
+
+        .disputes-table tr:hover {
+            background: #f7f7f7;
+        }
+
+        .disputes-table tr.selected {
+            background: #e8f2ff;
+        }
+
+        .status-under_bank_review {
+            color: #666;
+        }
+
+        .status-action_required {
+            color: #c23d4b;
+        }
+
+        .resolution-success {
+            color: #1ea672;
+        }
+
+        .resolution-failure {
+            color: #c23d4b;
+        }
+
+        /* Detail Blade */
+        .dispute-detail-blade {
+            width: 400px;
+            background: white;
+            border-left: 1px solid #e6e6e6;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dispute-detail-blade.visible {
+            transform: translateX(0);
+        }
+
+        .blade-header {
+            padding: 16px;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blade-header h2 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .blade-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .close-button {
+            font-size: 24px;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .more-button {
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .blade-content {
+            height: calc(100vh - 57px);
+            overflow-y: auto;
+        }
+
+        .challenge-banner {
+            background: #1F1F1F;
+            padding: 16px;
+            margin: 16px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .challenge-banner p {
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .challenge-banner .days-left {
+            font-weight: 500;
+        }
+
+        .challenge-banner .description {
+            opacity: 0.8;
+        }
+
+        .challenge-button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .challenge-button.primary {
+            background: #0B74FF;
+            color: white;
+            border: none;
+        }
+
+        .challenge-button.secondary {
+            background: white;
+            color: black;
+            border: none;
+        }
+
+        .dispute-details {
+            padding: 16px;
+        }
+
+        .dispute-amount {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .detail-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-section h4 {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            font-weight: normal;
+        }
+
+        .amount-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .amount-row > div {
+            flex: 1;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .unknown-badge {
+            background: #f0f0f0;
+            color: #666;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .timeline {
+            margin-top: 24px;
+            padding: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .timeline-header h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .learn-more {
+            color: #0B74FF;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .timeline-event {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .event-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f7f7f7;
+            flex-shrink: 0;
+        }
+
+        .event-details h4 {
+            text-transform: none;
+            font-weight: 500;
+            color: #1f1f1f;
+            margin-bottom: 4px;
+        }
+
+        .event-details p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .event-details time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .amount-large {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Evidence Tags */
+        .evidence-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #E8F2FF;
+            color: #0B74FF;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .evidence-tag.complete {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .evidence-tag.incomplete {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .evidence-tag-icon {
+            margin-right: 4px;
+        }
+
+        /* Evidence Requirements */
+        .evidence-requirements {
+            margin: 16px;
+            padding: 16px;
+            background: #F5F9FF;
+            border-radius: 8px;
+        }
+
+        .evidence-requirements h4 {
+            color: #1f1f1f;
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .evidence-requirements ul {
+            list-style: none;
+        }
+
+        .evidence-requirements li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .evidence-requirements .status-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .evidence-requirements .status-icon.complete {
+            color: #2E7D32;
+        }
+
+        .evidence-requirements .status-icon.incomplete {
+            color: #E65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="disputes-container">
+        <div class="disputes-list">
+            <header class="disputes-header">
+                <div class="header-top">
+                    <button type="button" class="menu-button">☰</button>
+                    <h1>Reports</h1>
+                    <div class="header-actions">
+                        <button type="button">🔍</button>
+                        <button type="button">?</button>
+                        <button type="button">🔔</button>
+                        <select id="sellerSelect" class="seller-select">
+                            <!-- Sellers will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="header-filters">
+                    <div class="location-filter">
+                        <select>
+                            <option>31 Locations</option>
+                        </select>
+                    </div>
+                    <div class="date-filter">
+                        <input type="text" value="09/26/2023-09/26/2024">
+                    </div>
+                </div>
+            </header>
+
+            <div class="disputes-content">
+                <h2 class="disputes-count">30 TOTAL DISPUTES</h2>
+                
+                <div class="disputes-section">
+                    <h3>Open Disputes</h3>
+                    <table class="disputes-table">
+                        <thead>
+                            <tr>
+                                <th>Date Disputed</th>
+                                <th>Date of Payment</th>
+                                <th>Location</th>
+                                <th>Amount</th>
+                                <th>Dispute Status</th>
+                                <th>Respond By</th>
+                            </tr>
+                        </thead>
+                        <tbody id="openDisputesTable">
+                            <!-- Open disputes will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="disputes-section">
+                    <h3>Dispute History</h3>
+                    <table class="disputes-table">
+                        <thead>
+                            <tr>
+                                <th>Date Disputed</th>
+                                <th>Date of Payment</th>
+                                <th>Location</th>
+                                <th>Amount</th>
+                                <th>Resolution</th>
+                            </tr>
+                        </thead>
+                        <tbody id="disputeHistoryTable">
+                            <!-- Dispute history will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="detailBlade" class="dispute-detail-blade">
+            <header class="blade-header">
+                <h2>Payment dispute</h2>
+                <div class="blade-actions">
+                    <button type="button" class="more-button">⋮</button>
+                    <button type="button" class="close-button" onclick="closeDetailBlade()">×</button>
+                </div>
+            </header>
+
+            <div class="blade-content">
+                <!-- Content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="evidence-mapping.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "name": "disputes-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline version of Square's Disputes Dashboard",
+  "repository": "",
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "ember build --environment=production",
+    "start": "ember serve",
+    "test": "ember test"
+  },
+  "devDependencies": {
+    "@ember/optional-features": "^2.0.0",
+    "@glimmer/component": "^1.1.2",
+    "@glimmer/tracking": "^1.1.2",
+    "babel-eslint": "^10.1.0",
+    "broccoli-asset-rev": "^3.0.0",
+    "ember-auto-import": "^2.6.3",
+    "ember-cli": "~4.12.2",
+    "ember-cli-app-version": "^5.0.0",
+    "ember-cli-babel": "^7.26.11",
+    "ember-cli-dependency-checker": "^3.3.1",
+    "ember-cli-htmlbars": "^6.2.0",
+    "ember-cli-inject-live-reload": "^2.1.0",
+    "ember-cli-sass": "^11.0.1",
+    "ember-cli-sri": "^2.1.1",
+    "ember-cli-terser": "^4.0.2",
+    "ember-data": "~4.11.3",
+    "ember-fetch": "^8.1.2",
+    "ember-load-initializers": "^2.1.2",
+    "ember-page-title": "^7.0.0",
+    "ember-qunit": "^6.2.0",
+    "ember-resolver": "^10.1.1",
+    "ember-source": "~4.12.0",
+    "ember-template-lint": "^5.7.2",
+    "loader.js": "^4.7.0",
+    "qunit": "^2.19.4",
+    "qunit-dom": "^2.0.0",
+    "sass": "^1.58.3",
+    "webpack": "^5.75.0"
+  },
+  "engines": {
+    "node": "14.* || 16.* || >= 18"
+  },
+  "ember": {
+    "edition": "octane"
+  }
+}

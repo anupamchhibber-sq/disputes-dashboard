@@ -1,0 +1,60 @@
+<div class="dispute-detail-blade">
+  <header class="blade-header">
+    <button type="button" class="close-button" {{on "click" @onClose}}>×</button>
+    <h2>Payment dispute</h2>
+  </header>
+
+  <div class="blade-content">
+    <div class="response-banner {{if this.isUrgent 'urgent'}}">
+      <p>Respond to dispute by {{@dispute.respondBy}}</p>
+      <p class="hint">You should respond to this now and submit it if you want to increase your chances of winning a dispute. Learn more when you provide more information.</p>
+      <button class="primary" type="button">Complete your response</button>
+    </div>
+
+    <div class="dispute-details">
+      <h3>Dispute for ${{@dispute.amount}}</h3>
+      
+      <div class="reason">
+        <h4>REASON</h4>
+        <p>{{@dispute.reason}}</p>
+      </div>
+
+      <div class="payment-details">
+        <div class="amount-row">
+          <div>
+            <h4>PAYMENT AMOUNT</h4>
+            <p>${{@dispute.paymentAmount}}</p>
+          </div>
+          <div>
+            <h4>DISPUTED AMOUNT</h4>
+            <p>${{@dispute.disputedAmount}}</p>
+          </div>
+        </div>
+
+        <div class="card-details">
+          <h4>CARD</h4>
+          <p>{{@dispute.cardNumber}}</p>
+        </div>
+
+        <div class="amount-held">
+          <h4>AMOUNT HELD</h4>
+          <p>${{@dispute.amountHeld}}</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h3>Timeline <a href="#" class="learn-more">Learn more</a></h3>
+        {{#each @dispute.timeline as |event|}}
+          <div class="timeline-event">
+            <div class="event-icon {{event.type}}"></div>
+            <div class="event-details">
+              <h4>{{event.title}}</h4>
+              <p>{{event.description}}</p>
+              <time>{{event.date}}</time>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

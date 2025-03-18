@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Fresh Bites Catering</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .address {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .document-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+        .evidence-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #E8F2FF;
+            color: #0B74FF;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .verification-banner {
+            margin-top: 40px;
+            padding: 20px;
+            background: #E8F2FF;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .verification-banner .title {
+            font-weight: bold;
+            color: #0B74FF;
+            margin-bottom: 10px;
+        }
+        .verification-banner .code {
+            font-family: monospace;
+            font-size: 16px;
+            color: #1f1f1f;
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .square-verification {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: #666;
+        }
+        .square-verification img {
+            height: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        th {
+            background: #f0f0f0;
+            font-weight: 500;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .details-box {
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .details-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .details-label {
+            width: 140px;
+            font-weight: 500;
+            color: #666;
+        }
+        .details-value {
+            flex: 1;
+        }
+        .status-timeline {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+        .status-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .status-time {
+            width: 100px;
+            color: #666;
+            font-size: 14px;
+        }
+        .status-info {
+            flex: 1;
+        }
+        .status-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .status-description {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Fresh Bites Catering</div>
+        <div class="address">
+            456 Culinary Court<br>
+            San Francisco, CA 94105<br>
+            (415) 555-5678
+        </div>
+    </div>
+
+    <div class="evidence-tag">VERIFIED EVIDENCE</div>
+    <div class="timestamp">Generated on March 18, 2024 12:45 PM PST</div>
+
+    <div class="document-title">
+        ORDER CONFIRMATION & DELIVERY DETAILS
+    </div>
+
+    <div class="section">
+        <div class="details-box">
+            <h3>Order Information</h3>
+            <div class="details-row">
+                <div class="details-label">Order #:</div>
+                <div class="details-value">ORD-2024-0301</div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Order Date:</div>
+                <div class="details-value">March 1, 2024</div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Order Time:</div>
+                <div class="details-value">11:30 AM PST</div>
+            </div>
+        </div>
+
+        <div class="details-box">
+            <h3>Customer Details</h3>
+            <div class="details-row">
+                <div class="details-label">Name:</div>
+                <div class="details-value">Michael Chen</div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Company:</div>
+                <div class="details-value">Tech Innovations Inc.</div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Phone:</div>
+                <div class="details-value">(415) 555-4321</div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Email:</div>
+                <div class="details-value">m.chen@techinnovations.com</div>
+            </div>
+        </div>
+
+        <div class="details-box">
+            <h3>Delivery Information</h3>
+            <div class="details-row">
+                <div class="details-label">Address:</div>
+                <div class="details-value">
+                    Tech Innovations Inc.<br>
+                    789 Market Street, Floor 12<br>
+                    San Francisco, CA 94103
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Requested Time:</div>
+                <div class="details-value">12:30 PM</div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">Instructions:</div>
+                <div class="details-value">Please deliver to reception on 12th floor</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Executive Lunch Box</td>
+                    <td>25</td>
+                    <td>Gourmet sandwich, salad, cookie, and beverage</td>
+                    <td>$500.00</td>
+                </tr>
+                <tr>
+                    <td>Fruit Platter</td>
+                    <td>2</td>
+                    <td>Seasonal fresh fruit arrangement</td>
+                    <td>$100.00</td>
+                </tr>
+                <tr>
+                    <td>Assorted Pastries</td>
+                    <td>3 dozen</td>
+                    <td>Mix of croissants, muffins, and danish</td>
+                    <td>$150.00</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Subtotal</td>
+                    <td>$750.00</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Delivery Fee</td>
+                    <td>$50.00</td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="3">Total</td>
+                    <td>$800.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="status-timeline">
+            <h3>Order Status Updates</h3>
+            <div class="status-item">
+                <div class="status-time">11:30 AM</div>
+                <div class="status-info">
+                    <div class="status-title">Order received and confirmed</div>
+                    <div class="status-description">Order details verified and payment processed</div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-time">11:45 AM</div>
+                <div class="status-info">
+                    <div class="status-title">Order preparation started</div>
+                    <div class="status-description">Kitchen team began preparing items</div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-time">12:15 PM</div>
+                <div class="status-info">
+                    <div class="status-title">Order out for delivery</div>
+                    <div class="status-description">Driver en route to delivery location</div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-time">12:35 PM</div>
+                <div class="status-info">
+                    <div class="status-title">Delivered</div>
+                    <div class="status-description">Order delivered to Tech Innovations Inc. reception</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="verification-banner">
+        <div class="title">Square Evidence Verification</div>
+        <div>This document has been verified by Square</div>
+        <div class="code">ORD-2024-0301-FB-001</div>
+        <div>Verify this document at square.com/verify</div>
+    </div>
+
+    <div class="footer">
+        <div class="square-verification">
+            <span>Verified by</span>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKESURBVGiB7Zk7aBRRFIb/M7ObxKhBRRE1aB67GwtBsLCzEGxEEEUQJZYKIoKID0QQRYJgYykiNnZaWPgABRUFwcLORh9gfCQGNOCuRjf7ODZ7LWYDm83u7M7szOxu4v1gYO89557zz51779w7gKIoiqIoiqIoyv+JsHpwsVjcbprmNSHELiHEBmNwWwdwFcBpAE8cx9lqGMZTr7HCa8B8Pn8ewEm/k3fBOoBzRHQ3nU7v9xrk6QFjzJ5KpfLQdd1NvQYEgJ2u66YBPMxkMjt6CfT6jDHGvwC4AGBtrwP3wHoAFwE8MgzjT7eBXT0gpdwD4DGA0V5m5pNxAEVr7e5ugrp6wHXd0wDW9SUt/4wAONVtUEcPSCnHALwGMNjvzHxSBbDVsqzX7QZ09MCgMIqAkwcAA8CRTp29bEKbpZR7/c7ID4ZhbEomk3s69SVaG6SU+wAcFEKMAHhORA+llC+6mTQajW4kop0ADhDRHgDvXNe9k8vlXvl9D9M0twE4BODQP9f3AHgG4H4ul/vYzVy2bW8QQhwBcADABIB3AO5ZlvWg7WCvB5pMJnOZTOYFgBEhxJhpmocBHM/n8/f6kK8/IpHIZQAQQowbhnEEwIlcLne7X3OEYvfp5gEp5SQRPQewKRQJ+cRxnG2GYXwLxQO2bX+XUk4S0aswJEREX2zbngzFA0Q0BWA6DPK1ENH0v3sEQvGAbduTRPQSwHgY5AGAiCaEEC9t2w7HA0KIKQDToUh2BhFNhyL5ZpLJ5EkiehKGbC1E9CSVSp0KxQPRaHQKwPcwZGv5EY/HT4fiASHETwA/w5CtpVqtTobiAUVRFEVRFEVRFEVRFEVRFEVR/iv+AoLsAy4GtOX5AAAAAElFTkSuQmCC" alt="Square Logo">
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "disputes": [
+    {
+      "id": "disp_001",
+      "dateDisputed": "2024-02-02",
+      "dateOfPayment": "2024-02-02",
+      "location": "SF Sports",
+      "status": "ACTION_REQUIRED",
+      "respondBy": "2024-02-09",
+      "amount": 30.30,
+      "reason": "Customer claimed goods or services were not received",
+      "paymentAmount": 30.30,
+      "disputedAmount": 30.30,
+      "cardNumber": "Visa 1111",
+      "amountHeld": 30.30,
+      "timeline": [
+        {
+          "type": "initial_payment",
+          "title": "Initial payment",
+          "description": "Type: Virtual terminal",
+          "date": "2024-01-01"
+        },
+        {
+          "type": "opened_dispute",
+          "title": "Opened dispute",
+          "description": "Dispute reported to Square",
+          "date": "2024-01-11"
+        },
+        {
+          "type": "response_required",
+          "title": "Your dispute response",
+          "description": "Waiting for your response",
+          "date": "2024-01-18"
+        },
+        {
+          "type": "square_review",
+          "title": "Square review",
+          "description": "We double check your response",
+          "date": "2024-01/25"
+        }
+      ]
+    },
+    {
+      "id": "disp_002",
+      "dateDisputed": "2024-02-02",
+      "dateOfPayment": "2024-02-02",
+      "location": "SF Sports",
+      "status": "ACTION_REQUIRED",
+      "respondBy": "2024-02-09",
+      "amount": 45.00,
+      "reason": "Customer claimed goods or services were not received",
+      "paymentAmount": 45.00,
+      "disputedAmount": 45.00,
+      "cardNumber": "Visa 2222",
+      "amountHeld": 45.00,
+      "timeline": []
+    }
+  ]
+}

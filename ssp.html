@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Dispute - Square Seller Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f1f1f;
+            line-height: 1.4;
+            background: #FAFAFA;
+        }
+
+        .ssp-container {
+            min-height: 100vh;
+            background: white;
+        }
+
+        .ssp-header {
+            background: white;
+            padding: 24px;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            color: #1f1f1f;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+
+        .close-button:hover {
+            background: #f7f7f7;
+        }
+
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+        }
+
+        .save-button {
+            background: none;
+            border: none;
+            color: #0B74FF;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+
+        .submit-button {
+            background: #0B74FF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .submit-button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .ssp-content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .ssp-illustration {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .ssp-title {
+            font-size: 20px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .ssp-subtitle {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .required span {
+            color: #0B74FF;
+        }
+
+        .optional span {
+            color: #666;
+        }
+
+        .question-section {
+            margin-bottom: 24px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            position: relative;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .radio-option:hover {
+            background: #f7f7f7;
+        }
+
+        .radio-option.selected {
+            border-color: #0B74FF;
+            background: #F5F9FF;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-content {
+            display: flex;
+            gap: 12px;
+        }
+
+        .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .radio-option.selected .radio-circle {
+            border-color: #0B74FF;
+        }
+
+        .radio-circle::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: #0B74FF;
+            border-radius: 50%;
+            display: none;
+        }
+
+        .radio-option.selected .radio-circle::after {
+            display: block;
+        }
+
+        .radio-text {
+            font-size: 14px;
+            color: #1f1f1f;
+        }
+
+        .radio-detail {
+            margin-top: 16px;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .radio-option.selected .radio-detail {
+            display: block;
+        }
+
+        /* First question specific styles */
+        .detail-content {
+            background: #f7f7f7;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 16px 16px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-bottom: 16px;
+            color: #1f1f1f;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .bullet-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .bullet-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #666;
+        }
+
+        .input-container {
+            margin-top: 16px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            background: white;
+        }
+
+        .text-input::placeholder {
+            color: #666;
+        }
+
+        /* Second question specific styles */
+        .pro-tip {
+            color: #666;
+            margin-bottom: 24px;
+            padding: 0 16px;
+        }
+
+        .evidence-sections {
+            background: #f7f7f7;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 16px 16px;
+        }
+
+        .evidence-label {
+            font-weight: 500;
+            color: #1f1f1f;
+            margin-bottom: 8px;
+        }
+
+        .evidence-list {
+            list-style: none;
+            color: #1f1f1f;
+            margin-bottom: 24px;
+        }
+
+        .evidence-list:last-child {
+            margin-bottom: 0;
+        }
+
+        .evidence-list li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .evidence-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .evidence-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #666;
+        }
+
+        .add-file-button {
+            width: calc(100% - 32px);
+            padding: 12px;
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            color: #0B74FF;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 0 16px;
+        }
+
+        .add-file-button:hover {
+            background: #f7f7f7;
+        }
+
+        /* Third question specific styles */
+        .checkbox-option {
+            display: block;
+            cursor: pointer;
+            padding: 16px;
+            background: #f0f7ff;
+            border-radius: 8px;
+            margin: 0 16px 16px;
+        }
+
+        .checkbox-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkbox-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0B74FF;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .checkbox-check {
+            width: 16px;
+            height: 16px;
+            fill: #0B74FF;
+            display: none;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-content .checkbox-check {
+            display: block;
+        }
+
+        .checkbox-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1f1f1f;
+        }
+
+        /* Common action buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+
+        .action-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+            border: none;
+        }
+
+        .cancel-button {
+            background: #f7f7f7;
+            color: #1f1f1f;
+        }
+
+        .save-action-button {
+            background: #0B74FF;
+            color: white;
+        }
+
+        .save-action-button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="ssp-container">
+        <header class="ssp-header">
+            <button class="close-button" onclick="window.location.href='index.html'">×</button>
+            <h1>Challenge dispute</h1>
+            <div class="header-actions">
+                <button class="save-button">Save for later</button>
+                <button class="submit-button" disabled onclick="window.location.href='index.html'">Submit</button>
+            </div>
+        </header>
+
+        <div class="ssp-content">
+            <div class="ssp-illustration">
+                <!-- Replace with actual illustration -->
+                🏛️
+            </div>
+
+            <h2 class="ssp-title">Let's challenge this Services Not Received dispute</h2>
+            <p class="ssp-subtitle">SLA FPO.</p>
+
+            <div class="progress-bar">
+                <div class="required">Required <span>0/1</span></div>
+                <div class="optional">Optional <span>0/2</span></div>
+            </div>
+
+            <div class="question-section">
+                <div class="radio-group">
+                    <label class="radio-option" onclick="selectOption(this, 'account')">
+                        <input type="radio" name="dispute_question" value="account">
+                        <div class="radio-content">
+                            <div class="radio-circle"></div>
+                            <div class="radio-text">Include your account of what happened:</div>
+                        </div>
+                        <div class="radio-detail">
+                            <div class="detail-content">
+                                <ul class="bullet-list">
+                                    <li>What was the transaction for? List out the goods or services provided.</li>
+                                    <li>What did you deliver to your customer?</li>
+                                    <li>Is there any additional context you have on what happened with the card holder?</li>
+                                </ul>
+                                <div class="input-container">
+                                    <textarea class="text-input" placeholder="Additional information"></textarea>
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="action-button cancel-button">Cancel</button>
+                                <button class="action-button save-action-button" disabled>Save</button>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="radio-option" onclick="selectOption(this, 'evidence')">
+                        <input type="radio" name="dispute_question" value="evidence">
+                        <div class="radio-content">
+                            <div class="radio-circle"></div>
+                            <div class="radio-text">OPTIONAL: Key evidence was already collected on your behalf, but if you have additional key or supporting evidence, you can add it here.</div>
+                        </div>
+                        <div class="radio-detail">
+                            <p class="pro-tip">Pro-tip: Only add supporting evidence if it adds significant context to key evidence you're providing.</p>
+                            
+                            <div class="evidence-sections">
+                                <p class="evidence-label">Key evidence:</p>
+                                <ul class="evidence-list">
+                                    <li>Itemized invoice or statement of work</li>
+                                    <li>Service agreements and contracts</li>
+                                    <li>Timestamped and dated proof of service delivery</li>
+                                    <li>Confirmation of delivery with tracking number and full address<br>(physical goods only) or email proof of delivery (digital goods only)</li>
+                                </ul>
+
+                                <p class="evidence-label">Supporting evidence:</p>
+                                <ul class="evidence-list">
+                                    <li>Text message or email conversations</li>
+                                    <li>Photos of completed work</li>
+                                    <li>Acknowledgment of your refund policy</li>
+                                </ul>
+
+                                <p class="evidence-label">Not accepted:</p>
+                                <ul class="evidence-list">
+                                    <li>Video footage</li>
+                                    <li>Audio recordings</li>
+                                </ul>
+                            </div>
+
+                            <button class="add-file-button">Add file</button>
+                            
+                            <div class="action-buttons">
+                                <button class="action-button cancel-button">Cancel</button>
+                                <button class="action-button save-action-button">Save</button>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="radio-option" onclick="selectOption(this, 'confirmation')">
+                        <input type="radio" name="dispute_question" value="confirmation">
+                        <div class="radio-content">
+                            <div class="radio-circle"></div>
+                            <div class="radio-text">All of the information and documentation submitted in or with this form is true, accurate and complete. I understand that submitting the requested information and/or documentation does not guarantee a resolution in my favor and that the card-issuing bank - not Square - makes the final decision on payment disputes. By submitting this form, I understand that I am unable to add additional information or documentation to this case.</div>
+                        </div>
+                        <div class="radio-detail">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="agreement" onchange="updateConfirmation(this)">
+                                <div class="checkbox-content">
+                                    <div class="checkbox-box">
+                                        <svg class="checkbox-check" viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="checkbox-text">Yes, I agree.</div>
+                                </div>
+                            </label>
+                            
+                            <div class="action-buttons">
+                                <button class="action-button cancel-button">Cancel</button>
+                                <button class="action-button save-action-button" disabled id="confirmationSaveButton">Save</button>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let confirmationSaved = false;
+        let accountSaved = false;
+        let savedAccountText = '';
+
+        function updateConfirmation(checkbox) {
+            const saveButton = document.getElementById('confirmationSaveButton');
+            // Enable save button only if checkbox is checked and confirmation isn't already saved
+            saveButton.disabled = !checkbox.checked || confirmationSaved;
+        }
+
+        function selectOption(element, type) {
+            // Remove selected class from all options
+            document.querySelectorAll('.radio-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+
+            // If account section is being opened and there's saved text, populate it
+            if (type === 'account' && savedAccountText) {
+                const textInput = element.querySelector('.text-input');
+                if (textInput) {
+                    textInput.value = savedAccountText;
+                    const saveButton = element.querySelector('.save-action-button');
+                    saveButton.disabled = true; // Disable save since content is already saved
+                }
+            }
+
+            // If confirmation section is being opened, update save button state
+            if (type === 'confirmation') {
+                const checkbox = element.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    updateConfirmation(checkbox);
+                }
+            }
+        }
+
+        function updateSubmitButton() {
+            const submitButton = document.querySelector('.submit-button');
+            submitButton.disabled = !(accountSaved && confirmationSaved);
+        }
+
+        // Add file input for evidence upload
+        const addFileButton = document.querySelector('.add-file-button');
+        if (addFileButton) {
+            addFileButton.addEventListener('click', () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.multiple = true;
+                input.accept = '.pdf,.doc,.docx,.jpg,.jpeg,.png';
+                input.onchange = (e) => {
+                    const files = Array.from(e.target.files);
+                    if (files.length > 0) {
+                        const fileList = document.createElement('div');
+                        fileList.className = 'file-list';
+                        fileList.style.margin = '16px';
+                        fileList.style.padding = '8px';
+                        files.forEach(file => {
+                            const fileItem = document.createElement('div');
+                            fileItem.style.marginBottom = '8px';
+                            fileItem.style.color = '#1f1f1f';
+                            fileItem.textContent = `📎 ${file.name}`;
+                            fileList.appendChild(fileItem);
+                        });
+                        const evidenceSection = addFileButton.closest('.radio-detail');
+                        const existingFileList = evidenceSection.querySelector('.file-list');
+                        if (existingFileList) {
+                            existingFileList.remove();
+                        }
+                        addFileButton.insertAdjacentElement('beforebegin', fileList);
+                    }
+                };
+                input.click();
+            });
+        }
+
+        // Handle text input changes
+        document.querySelectorAll('.text-input').forEach(input => {
+            input.addEventListener('input', () => {
+                const saveButton = input.closest('.radio-detail').querySelector('.save-action-button');
+                saveButton.disabled = !input.value.trim();
+            });
+        });
+
+        // Handle checkbox changes
+        const agreementCheckbox = document.querySelector('input[name="agreement"]');
+        if (agreementCheckbox) {
+            agreementCheckbox.addEventListener('change', function() {
+                updateConfirmation(this);
+            });
+        }
+
+        // Handle cancel button clicks
+        document.querySelectorAll('.cancel-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const radioOption = e.target.closest('.radio-option');
+                radioOption.classList.remove('selected');
+                const radioInput = radioOption.querySelector('input[type="radio"]');
+                radioInput.checked = false;
+                
+                // Reset the specific section
+                if (radioOption.querySelector('input[value="account"]')) {
+                    accountSaved = false;
+                    const textInput = radioOption.querySelector('.text-input');
+                    if (textInput) textInput.value = savedAccountText; // Restore saved text if any
+                } else if (radioOption.querySelector('input[value="confirmation"]')) {
+                    // Don't reset confirmation if it's saved
+                    if (!confirmationSaved) {
+                        const checkbox = radioOption.querySelector('input[type="checkbox"]');
+                        if (checkbox) {
+                            checkbox.checked = false;
+                            updateConfirmation(checkbox);
+                        }
+                    }
+                }
+                
+                updateSubmitButton();
+            });
+        });
+
+        // Handle save button clicks
+        document.querySelectorAll('.save-action-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const radioOption = e.target.closest('.radio-option');
+                
+                if (radioOption.querySelector('input[value="account"]')) {
+                    const textInput = radioOption.querySelector('.text-input');
+                    if (textInput && textInput.value.trim()) {
+                        accountSaved = true;
+                        savedAccountText = textInput.value;
+                        button.disabled = true; // Disable save button after saving
+                    }
+                } else if (radioOption.querySelector('input[value="confirmation"]')) {
+                    const checkbox = radioOption.querySelector('input[type="checkbox"]');
+                    if (checkbox && checkbox.checked) {
+                        confirmationSaved = true;
+                        button.disabled = true; // Disable save button after saving
+                    }
+                }
+                
+                radioOption.classList.remove('selected');
+                updateSubmitButton();
+            });
+        });
+
+        // Handle submit button click
+        document.querySelector('.submit-button').addEventListener('click', () => {
+            if (accountSaved && confirmationSaved) {
+                // Get the current dispute ID from the URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const disputeId = urlParams.get('disputeId');
+                
+                // Update the dispute status in the data store
+                if (disputeId) {
+                    window.opener.mockData.updateDisputeStatus(disputeId, "Under bank review");
+                    window.opener.renderTables(); // Refresh the dashboard tables
+                }
+                
+                // Close this window and return to dashboard
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
