@@ -115,8 +115,14 @@
             height: 24px;
             margin-right: 12px;
             flex-shrink: 0;
-            background: #f7f7f7;
-            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .evidence-icon::before {
+            content: "📄";
+            font-size: 16px;
         }
 
         .evidence-details {
@@ -156,6 +162,80 @@
             margin-left: auto;
             padding-left: 16px;
         }
+
+        /* Evidence Modal Styles */
+        .evidence-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .evidence-modal {
+            background: white;
+            width: 560px;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-close, .modal-done {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .modal-done {
+            color: #0B74FF;
+        }
+
+        .evidence-section {
+            margin-bottom: 24px;
+        }
+
+        .evidence-section h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .evidence-item-modal {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .checkmark {
+            color: #00A857;
+        }
+
+        .plus {
+            color: #666;
+        }
+
+        .x-mark {
+            color: #FF3B30;
+        }
     </style>
 </head>
 <body>
@@ -168,8 +248,8 @@
 
         <div class="interstitial-content">
             <div class="content-header">
-                <h1>Review Evidence</h1>
-                <p>Here's the evidence we've collected for your dispute. You can review each item before proceeding.</p>
+                <h1>Here's the evidence we collected on your behalf</h1>
+                <p>Want to add additional evidence? Just make sure it's <a href="#" onclick="showEvidenceModal(event)" style="color: #0B74FF; text-decoration: none;">the kind that card networks accept</a>.</p>
             </div>
 
             <ul class="evidence-list" id="evidenceList">
@@ -180,6 +260,41 @@
 
     <script src="data.js"></script>
     <script src="evidence-mapping.js"></script>
+
+    <!-- Evidence Modal -->
+    <div class="evidence-modal-overlay" id="evidenceModal">
+        <div class="evidence-modal">
+            <div class="modal-header">
+                <div class="modal-title">Save time by only adding accepted evidence types</div>
+                <button class="modal-done" onclick="closeEvidenceModal()">Done</button>
+            </div>
+            <p style="color: #666; margin-bottom: 24px;">Not all evidence types are accepted by card networks, so check this list before you gather and upload evidence for your dispute.</p>
+            <div class="evidence-section">
+                <h3>Pro-tip</h3>
+                <p>Only add supporting evidence if it adds significant context to key evidence you're providing.</p>
+            </div>
+            <div class="evidence-section">
+                <h3>Key evidence</h3>
+                <div class="evidence-item-modal"><span class="checkmark">✓</span> Goods and services confirmation</div>
+                <div class="evidence-item-modal"><span class="checkmark">✓</span> Service agreements and contracts</div>
+                <div class="evidence-item-modal"><span class="checkmark">✓</span> Timestamped and dated proof of service delivery</div>
+                <div class="evidence-item-modal"><span class="checkmark">✓</span> Itemized invoice or statement of work</div>
+            </div>
+            <div class="evidence-section">
+                <h3>Supporting evidence</h3>
+                <div class="evidence-item-modal"><span class="plus">+</span> Text message or email conversations</div>
+                <div class="evidence-item-modal"><span class="plus">+</span> Photos of completed work</div>
+                <div class="evidence-item-modal"><span class="plus">+</span> Customer reviews</div>
+                <div class="evidence-item-modal"><span class="plus">+</span> Acknowledgment of your refund policy</div>
+            </div>
+            <div class="evidence-section">
+                <h3>Not accepted</h3>
+                <div class="evidence-item-modal"><span class="x-mark">×</span> Video footage</div>
+                <div class="evidence-item-modal"><span class="x-mark">×</span> Audio recordings</div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Get dispute ID and seller ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -328,6 +443,15 @@
             if (path) {
                 window.open(path, '_blank');
             }
+        }
+
+        function showEvidenceModal(event) {
+            event.preventDefault();
+            document.getElementById('evidenceModal').style.display = 'flex';
+        }
+
+        function closeEvidenceModal() {
+            document.getElementById('evidenceModal').style.display = 'none';
         }
 
         function goBack() {
