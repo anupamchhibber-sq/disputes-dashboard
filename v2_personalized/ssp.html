@@ -267,6 +267,7 @@
                     <input type="checkbox" class="checkbox-input">
                     <div>
                         <h3>OPTIONAL: Key evidence was already collected on your behalf, but if you have additional key or supporting evidence, you can add it here.</h3>
+                        <div id="evidenceList"></div>
                         <div class="pro-tip">
                             Pro-tip: Only add supporting evidence if it adds significant context to key evidence you're providing.
                         </div>
@@ -312,6 +313,22 @@
         // Update the title based on dispute reason
         const disputeTitle = document.getElementById('disputeTitle');
         disputeTitle.textContent = `Let's challenge this ${dispute.disputeReason.replace(/_/g, ' ')} dispute`;
+
+        // Populate evidence list
+        const evidenceList = document.getElementById('evidenceList');
+        if (dispute.evidence) {
+            const evidenceHtml = Object.entries(dispute.evidence)
+                .filter(([_, value]) => value.exists)
+                .map(([type, value]) => `
+                    <div style="margin: 10px 0;">
+                        <a href="interstitial.html?seller=${sellerId}&type=${type}" 
+                           style="color: #0B74FF; text-decoration: none;">
+                            ${type.replace(/_/g, ' ')}
+                        </a>
+                    </div>
+                `).join('');
+            evidenceList.innerHTML = evidenceHtml;
+        }
     </script>
 </body>
 </html>

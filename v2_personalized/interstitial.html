@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challenge Dispute - Square Seller Protection</title>
+    <title>Evidence Interstitial</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,9 +12,9 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: white;
             color: #1f1f1f;
             line-height: 1.4;
-            background: #FAFAFA;
         }
 
         .interstitial-overlay {
@@ -26,349 +24,318 @@
             right: 0;
             bottom: 0;
             background: white;
-            z-index: 2000;
-        }
-
-        .interstitial {
-            height: 100%;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
         }
 
         .interstitial-header {
-            background: white;
-            padding: 24px;
-            border-bottom: 1px solid #e6e6e6;
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e6e6e6;
+            background: white;
         }
 
-        .interstitial-close {
+        .close-button {
             background: none;
             border: none;
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
-            padding: 8px;
-            color: #1f1f1f;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 16px;
+            color: #666;
+            padding: 4px;
         }
 
-        .interstitial-close:hover {
-            background: #f7f7f7;
-        }
-
-        .interstitial h1 {
+        .header-title {
             font-size: 16px;
             font-weight: 500;
         }
 
-        .interstitial-next {
-            margin-left: auto;
+        .next-button {
             background: #0B74FF;
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 6px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            font-size: 14px;
+        }
+
+        .next-button:hover {
+            background: #0960d1;
         }
 
         .interstitial-content {
             flex: 1;
-            padding: 40px;
-            overflow-y: auto;
+            padding: 32px;
             max-width: 640px;
             margin: 0 auto;
             width: 100%;
+            overflow-y: auto;
         }
 
-        .interstitial h2 {
-            font-size: 20px;
-            font-weight: 500;
-            text-align: center;
-            margin-bottom: 16px;
-            color: #1f1f1f;
-        }
-
-        .evidence-note {
-            font-size: 14px;
-            color: #1f1f1f;
-            text-align: center;
+        .content-header {
             margin-bottom: 32px;
         }
 
-        .evidence-note a {
-            color: #0B74FF;
-            text-decoration: none;
+        .content-header h1 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .content-header p {
+            color: #666;
+            font-size: 14px;
         }
 
         .evidence-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            list-style: none;
         }
 
         .evidence-item {
+            display: flex;
+            align-items: flex-start;
             padding: 16px;
             border: 1px solid #e6e6e6;
             border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
+            margin-bottom: 12px;
             cursor: pointer;
+            transition: border-color 0.2s;
         }
 
         .evidence-item:hover {
-            background: #f7f7f7;
-        }
-
-        .evidence-item-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            border-color: #0B74FF;
         }
 
         .evidence-icon {
             width: 24px;
             height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
+            margin-right: 12px;
+            flex-shrink: 0;
+            background: #f7f7f7;
+            border-radius: 50%;
         }
 
         .evidence-details {
+            flex-grow: 1;
+        }
+
+        .evidence-title {
             font-size: 14px;
-            color: #1f1f1f;
-        }
-
-        .evidence-details .uploaded-by {
-            color: #666;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        .key-evidence {
-            color: #0B74FF;
-            font-size: 13px;
             font-weight: 500;
+            margin-bottom: 4px;
+            color: #0B74FF;
+        }
+
+        .evidence-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .evidence-tag {
+            display: inline-block;
             padding: 4px 8px;
-            border-radius: 4px;
             background: #E8F2FF;
+            color: #0B74FF;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .evidence-tag.not-available {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .evidence-status {
+            font-size: 14px;
+            color: #666;
+            margin-left: auto;
+            padding-left: 16px;
         }
     </style>
 </head>
 <body>
     <div class="interstitial-overlay">
-        <div class="interstitial">
-            <div class="interstitial-header">
-                <button class="interstitial-close" onclick="goBack()">×</button>
-                <h1>Challenge dispute</h1>
-                <button class="interstitial-next" onclick="goToSSP()">Next</button>
+        <div class="interstitial-header">
+            <button class="close-button" onclick="goBack()">×</button>
+            <div class="header-title">Review Evidence</div>
+            <button class="next-button" onclick="goToSSP()">Next</button>
+        </div>
+
+        <div class="interstitial-content">
+            <div class="content-header">
+                <h1>Review Evidence</h1>
+                <p>Here's the evidence we've collected for your dispute. You can review each item before proceeding.</p>
             </div>
-            
-            <div class="interstitial-content">
-                <h2 id="interstitialTitle">Loading...</h2>
-                <p class="evidence-note" id="interstitialSubtitle">Loading...</p>
-                <div class="evidence-list" id="evidenceList">
-                    <!-- Evidence items will be inserted here -->
-                </div>
-            </div>
+
+            <ul class="evidence-list" id="evidenceList">
+                <!-- Evidence items will be inserted here -->
+            </ul>
         </div>
     </div>
 
-    <script src="evidence-mapping.js"></script>
     <script src="data.js"></script>
+    <script src="evidence-mapping.js"></script>
     <script>
-        // Debug logging function
-        function debug(step, data) {
-            console.log(`[DEBUG ${step}]:`, data);
+        // Get dispute ID and seller ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const disputeId = urlParams.get('disputeId');
+        const sellerId = urlParams.get('sellerId');
+
+        if (!disputeId || !sellerId) {
+            document.querySelector('.content-header').innerHTML = '<h1>Error: Missing Parameters</h1>';
+        } else {
+            // Set the seller and get the dispute
+            mockData.setSeller(sellerId);
+            mockData.selectedDispute = mockData.disputes.open.find(d => d.id === disputeId);
+            const dispute = mockData.selectedDispute;
+            
+            if (dispute) {
+                // Get evidence requirements based on seller type and dispute reason
+                const evidenceRequirements = getEvidenceRequirements(mockData.currentSeller.audience, dispute.disputeReason);
+                
+                // Render evidence list
+                const evidenceList = document.getElementById('evidenceList');
+                evidenceList.innerHTML = evidenceRequirements.square_provided.map(evidence => {
+                    const evidenceExists = dispute.evidence?.[evidence.type]?.exists;
+                    return `
+                        <li class="evidence-item" onclick="openEvidence('${evidence.type}')">
+                            <div class="evidence-icon"></div>
+                            <div class="evidence-details">
+                                <div class="evidence-title">
+                                    ${evidence.name}
+                                    ${evidence.is_key ? '<span class="evidence-tag">Key Evidence</span>' : ''}
+                                </div>
+                                <div class="evidence-description">${evidence.description}</div>
+                            </div>
+                            <div class="evidence-status">
+                                ${evidenceExists ? 'View' : '<span class="evidence-tag not-available">No file available</span>'}
+                            </div>
+                        </li>
+                    `;
+                }).join('');
+            } else {
+                document.querySelector('.content-header').innerHTML = '<h1>Error: Dispute Not Found</h1>';
+            }
         }
 
-        // Navigation functions
+        function openEvidence(type) {
+            const paths = {
+                'js_skincare': {
+                    'appointment_confirmation': 'evidence/appointments/js_skincare_appointment.html',
+                    'payment_receipt': 'evidence/receipts/js_skincare_receipt.html',
+                    'customer_agreement': 'evidence/contracts/js_skincare_agreement.html',
+                    'product_description': 'evidence/descriptions/js_skincare_product.html',
+                    'product_ingredients': 'evidence/products/js_skincare_ingredients.html'
+                },
+                'fresh_bites': {
+                    'order_confirmation': 'evidence/orders/fresh_bites_order.html',
+                    'payment_receipt': 'evidence/receipts/fresh_bites_receipt.html'
+                },
+                'tech_hub': {
+                    'payment_receipt': 'evidence/receipts/tech_hub_receipt.html',
+                    'product_description': 'evidence/descriptions/tech_hub_product.html',
+                    'shipping_confirmation': 'evidence/shipping/tech_hub_shipping.html'
+                },
+                'fitness_first': {
+                    'membership_agreement': 'evidence/membership/fitness_first_agreement.html',
+                    'payment_history': 'evidence/membership/fitness_first_payments.html'
+                },
+                'urban_threads': {
+                    'product_description': 'evidence/products/urban_threads_product.html',
+                    'payment_receipt': 'evidence/receipts/urban_threads_receipt.html'
+                },
+                'auto_care': {
+                    'appointment_confirmation': 'evidence/appointments/auto_care_appointment.html',
+                    'service_record': 'evidence/services/auto_care_service_record.html',
+                    'payment_receipt': 'evidence/receipts/auto_care_receipt_1500.html',
+                    'customer_agreement': 'evidence/contracts/auto_care_agreement.html',
+                    'repair_documentation': 'evidence/services/auto_care_repair_doc.html'
+                },
+                'pet_paradise': {
+                    'order_confirmation': 'evidence/orders/pet_paradise_order.html',
+                    'payment_receipt': 'evidence/receipts/pet_paradise_receipt.html',
+                    'shipping_confirmation': 'evidence/shipping/pet_paradise_shipping.html'
+                },
+                'home_decor': {
+                    'product_description': 'evidence/products/home_decor_product.html',
+                    'payment_receipt': 'evidence/receipts/home_decor_receipt.html'
+                },
+                'garden_center': {
+                    'order_confirmation': 'evidence/orders/green_thumb_order.html',
+                    'payment_receipt': 'evidence/receipts/green_thumb_receipt.html',
+                    'delivery_confirmation': 'evidence/delivery/green_thumb_delivery.html'
+                },
+                'art_supplies': {
+                    'order_confirmation': 'evidence/orders/creative_art_order.html',
+                    'payment_receipt': 'evidence/receipts/creative_art_receipt.html',
+                    'shipping_confirmation': 'evidence/shipping/creative_art_shipping.html'
+                },
+                'yoga_studio': {
+                    'membership_agreement': 'evidence/membership/zen_yoga_agreement.html',
+                    'payment_history': 'evidence/membership/zen_yoga_payments.html'
+                },
+                'music_store': {
+                    'product_description': 'evidence/products/melody_music_product.html',
+                    'payment_receipt': 'evidence/receipts/melody_music_receipt.html'
+                },
+                'coffee_shop': {
+                    'transaction_records': 'evidence/transactions/daily_grind_transactions.html',
+                    'payment_receipt': 'evidence/receipts/daily_grind_receipt.html'
+                },
+                'dance_studio': {
+                    'membership_agreement': 'evidence/membership/rhythm_dance_agreement.html',
+                    'payment_history': 'evidence/membership/rhythm_dance_payments.html'
+                },
+                'bike_shop': {
+                    'product_description': 'evidence/products/city_cycles_product.html',
+                    'payment_receipt': 'evidence/receipts/city_cycles_receipt.html'
+                },
+                'dental_clinic': {
+                    'appointment_confirmation': 'evidence/appointments/bright_smile_appointment.html',
+                    'payment_receipt': 'evidence/receipts/bright_smile_receipt.html',
+                    'customer_agreement': 'evidence/contracts/bright_smile_agreement.html',
+                    'service_record': 'evidence/services/bright_smile_record.html'
+                },
+                'book_store': {
+                    'order_confirmation': 'evidence/orders/chapter_one_order.html',
+                    'payment_receipt': 'evidence/receipts/chapter_one_receipt.html',
+                    'shipping_confirmation': 'evidence/shipping/chapter_one_shipping.html'
+                },
+                'hotel': {
+                    'appointment_confirmation': 'evidence/appointments/city_view_reservation.html',
+                    'payment_receipt': 'evidence/receipts/city_view_receipt.html',
+                    'customer_agreement': 'evidence/contracts/city_view_agreement.html',
+                    'service_record': 'evidence/services/city_view_booking.html'
+                },
+                'cleaning_service': {
+                    'appointment_confirmation': 'evidence/appointments/spotless_cleaning_appointment.html',
+                    'payment_receipt': 'evidence/receipts/spotless_cleaning_receipt.html',
+                    'customer_agreement': 'evidence/contracts/spotless_cleaning_agreement.html',
+                    'service_record': 'evidence/services/spotless_cleaning_record.html'
+                },
+                'jewelry_store': {
+                    'product_description': 'evidence/products/golden_gems_product.html',
+                    'payment_receipt': 'evidence/receipts/golden_gems_receipt.html'
+                }
+            };
+
+            const path = paths[sellerId]?.[type];
+            if (path) {
+                window.open(path, '_blank');
+            }
+        }
+
         function goBack() {
             window.location.href = 'index.html';
         }
 
         function goToSSP() {
             window.location.href = `ssp.html?disputeId=${disputeId}&sellerId=${sellerId}`;
-        }
-
-        // Get dispute ID and seller ID from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const disputeId = urlParams.get('disputeId');
-        const sellerId = urlParams.get('sellerId');
-
-        debug('URL Params', { disputeId, sellerId });
-
-        if (!disputeId || !sellerId) {
-            console.error('Missing required URL parameters');
-            document.getElementById('interstitialTitle').textContent = 'Error: Missing parameters';
-            document.getElementById('interstitialSubtitle').textContent = 'Please return to the dashboard and try again.';
-            throw new Error('Missing URL parameters');
-        }
-
-        try {
-            // Set the correct seller
-            debug('Setting seller', sellerId);
-            if (!mockData.setSeller(sellerId)) {
-                document.getElementById('interstitialTitle').textContent = 'Error: Invalid seller';
-                document.getElementById('interstitialSubtitle').textContent = 'Please return to the dashboard and try again.';
-                throw new Error('Invalid seller ID');
-            }
-
-            // Find the current dispute
-            const dispute = mockData.disputes.open.find(d => d.id === disputeId);
-            debug('Found dispute', dispute);
-
-            if (!dispute) {
-                console.error('Dispute not found');
-                document.getElementById('interstitialTitle').textContent = 'Error: Dispute not found';
-                document.getElementById('interstitialSubtitle').textContent = 'Please return to the dashboard and try again.';
-                throw new Error('Dispute not found');
-            }
-
-            // Get evidence requirements and language
-            const seller = mockData.currentSeller;
-            debug('Current seller', seller);
-
-            // Get dispute reason in correct format
-            const disputeReason = dispute.disputeReason.toLowerCase();
-            debug('Dispute reason', disputeReason);
-
-            // Get language and requirements
-            const language = {
-                interstitial_title: `Let's review your evidence for this ${disputeReason.replace(/_/g, ' ')} dispute`,
-                evidence_intro: `We've collected key evidence from your ${seller.audience.replace(/_/g, ' ')} business records.`
-            };
-            debug('Language', language);
-
-            const requirements = getEvidenceRequirements(seller.audience, disputeReason);
-            debug('Requirements', requirements);
-
-            if (!requirements || !requirements.square_provided) {
-                console.error('Invalid evidence requirements');
-                document.getElementById('interstitialTitle').textContent = 'Error: Invalid evidence requirements';
-                document.getElementById('interstitialSubtitle').textContent = 'Please contact support.';
-                throw new Error('Invalid evidence requirements');
-            }
-
-            // Update title and subtitle
-            document.getElementById('interstitialTitle').textContent = language.interstitial_title;
-            document.getElementById('interstitialSubtitle').innerHTML = `
-                ${language.evidence_intro}<br>
-                Want to add additional evidence? Just make sure it's <a href="#">the kind that card networks accept</a>.
-            `;
-
-            // Render evidence list
-            const evidenceList = document.getElementById('evidenceList');
-            evidenceList.innerHTML = requirements.square_provided.map(evidence => {
-                const evidenceExists = dispute.evidence && 
-                                     dispute.evidence[evidence.type] && 
-                                     dispute.evidence[evidence.type].exists &&
-                                     evidence.file_exists;
-                
-                debug('Evidence item', { type: evidence.type, exists: evidenceExists });
-                
-                return `
-                    <div class="evidence-item" onclick="openEvidence('${evidence.type}')" 
-                         style="${!evidenceExists ? 'opacity: 0.5; cursor: not-allowed;' : ''}">
-                        <div class="evidence-item-left">
-                            <div class="evidence-icon">📄</div>
-                            <div class="evidence-details">
-                                <div>${evidence.name}</div>
-                                <div class="uploaded-by">
-                                    ${evidenceExists 
-                                        ? `1 file uploaded by Square on ${new Date(dispute.evidence[evidence.type].date).toLocaleDateString()}`
-                                        : 'No file available'}
-                                </div>
-                            </div>
-                        </div>
-                        ${evidence.is_key ? '<div class="key-evidence">Key evidence</div>' : ''}
-                    </div>
-                `;
-            }).join('');
-
-        } catch (error) {
-            console.error('Error in interstitial initialization:', error);
-            document.getElementById('interstitialTitle').textContent = 'Error loading evidence';
-            document.getElementById('interstitialSubtitle').textContent = 'Please try again or contact support.';
-        }
-
-        function openEvidence(type) {
-            try {
-                // Get the current dispute and seller info
-                const dispute = mockData.disputes.open.find(d => d.id === disputeId);
-                const seller = mockData.currentSeller;
-                
-                debug('Opening evidence', { type, dispute, seller });
-                
-                if (!dispute || !dispute.evidence || !dispute.evidence[type]) {
-                    console.log('Evidence not found:', type);
-                    return;
-                }
-
-                // Map evidence types to their file paths based on seller and type
-                const getEvidencePath = (sellerId, type) => {
-                    const paths = {
-                        'js_skincare': {
-                            'appointment_confirmation': 'evidence/appointments/js_skincare_appointment.html',
-                            'payment_receipt': 'evidence/receipts/js_skincare_receipt.html',
-                            'customer_agreement': 'evidence/contracts/js_skincare_agreement.html',
-                            'service_description': 'evidence/descriptions/js_skincare_service.html',
-                            'product_description': 'evidence/descriptions/js_skincare_product.html',
-                            'transaction_details': 'evidence/transactions/js_skincare_details.html'
-                        },
-                        'fresh_bites': {
-                            'order_confirmation': 'evidence/orders/fresh_bites_order.html'
-                        },
-                        'tech_hub': {
-                            'payment_receipt': 'evidence/receipts/tech_hub_receipt.html',
-                            'product_description': 'evidence/descriptions/tech_hub_product.html'
-                        },
-                        'fitness_first': {
-                            'membership_agreement': 'evidence/membership/fitness_first_agreement.html',
-                            'payment_history': 'evidence/membership/fitness_first_payments.html'
-                        }
-                    };
-
-                    // Try to get seller-specific path, fallback to default evidence
-                    const sellerPaths = paths[sellerId] || {};
-                    const evidencePath = sellerPaths[type];
-                    
-                    if (evidencePath) {
-                        return evidencePath;
-                    }
-                    
-                    // Fallback to default evidence files based on type
-                    const defaultPaths = {
-                        'payment_receipt': 'evidence/Receipt.html',
-                        'customer_agreement': 'evidence/Contract.html',
-                        'invoice': 'evidence/Invoice.html'
-                    };
-                    
-                    return defaultPaths[type];
-                };
-
-                const evidencePath = getEvidencePath(sellerId, type);
-                
-                if (evidencePath) {
-                    debug('Opening evidence file', evidencePath);
-                    window.open(evidencePath, '_blank');
-                } else {
-                    console.log('No evidence file mapping found for:', { sellerId, type });
-                }
-            } catch (error) {
-                console.error('Error opening evidence:', error);
-            }
         }
     </script>
 </body>

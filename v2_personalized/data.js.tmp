@@ -1,0 +1,39 @@
+// data.js
+
+const mockSellers = {
+    // ... previous sellers ...
+    "coffee_shop": {
+        name: "Daily Grind Coffee",
+        audience: 'food_and_beverage',
+        disputes: {
+            open: [
+                {
+                    id: "disp_018",
+                    dateDisputed: "2024-03-02",
+                    dateOfPayment: "2024-02-15",
+                    location: "Downtown Shop",
+                    status: "Action required",
+                    respondBy: "2024-03-17",
+                    amount: 150.00,
+                    disputedAmount: 150.00,
+                    cardPresent: false,
+                    disputeReason: "duplicate",
+                    evidence: {
+                        transaction_records: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "transaction_records"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        }
+                    }
+                }
+            ],
+            history: []
+        }
+    }
+    // ... other sellers ...
+};

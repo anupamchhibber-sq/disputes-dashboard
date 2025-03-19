@@ -219,9 +219,15 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "not_as_described",
                     evidence: {
-                        product_photos: {
+                        product_description: {
                             exists: true,
-                            date: "2024-02-20"
+                            date: "2024-02-20",
+                            type: "product_description"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "payment_receipt"
                         }
                     }
                 }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt - City View Hotel</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #006AFF;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .evidence-tag {
+            background: #E8F2FF;
+            color: #006AFF;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .receipt-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .verification {
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+        }
+        .amount {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>City View Hotel</h1>
+        <p>Payment Receipt</p>
+    </div>
+
+    <div class="evidence-tag">Square Evidence Record</div>
+
+    <div class="receipt-details">
+        <h2>Transaction Details</h2>
+        <p><strong>Transaction ID:</strong> trx_CVH20240215_600</p>
+        <p><strong>Date:</strong> February 15, 2024 2:30 PM PST</p>
+        <p><strong>Location:</strong> Front Desk</p>
+        <p><strong>Confirmation Number:</strong> CVH-2024-02-600</p>
+        
+        <div class="section">
+            <h3>Charges</h3>
+            <table>
+                <tr>
+                    <td>Deluxe King Suite (2 nights @ $300/night)</td>
+                    <td class="amount">$600.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtotal</strong></td>
+                    <td class="amount">$600.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Tax</strong></td>
+                    <td class="amount">$0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td class="amount"><strong>$600.00</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Reservation Details</h3>
+            <ul>
+                <li><strong>Check-in:</strong> February 20, 2024 (after 3:00 PM)</li>
+                <li><strong>Check-out:</strong> February 22, 2024 (before 11:00 AM)</li>
+                <li><strong>Room Type:</strong> Deluxe King Suite</li>
+                <li><strong>Room Number:</strong> 1205</li>
+                <li><strong>Guests:</strong> 2 adults</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Payment Information</h3>
+            <p><strong>Method:</strong> VISA ****5432</p>
+            <p><strong>Card Present:</strong> No</p>
+            <p><strong>Authentication:</strong> Online payment</p>
+            <p><strong>Authorization Code:</strong> 567890</p>
+        </div>
+
+        <div class="section">
+            <h3>Additional Information</h3>
+            <ul>
+                <li>Full payment required at booking</li>
+                <li>48-hour cancellation policy</li>
+                <li>Incidental hold: $100 at check-in</li>
+                <li>Resort fees included</li>
+                <li>Free WiFi included</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="verification">
+        <p>This is an official Square payment record.</p>
+        <p>Transaction ID: trx_CVH20240215_600</p>
+        <p>Verification Code: SQ-CVH-2024-02-600</p>
+        <p>Generated: March 19, 2024 16:49:27</p>
+    </div>
+</body>
+</html>

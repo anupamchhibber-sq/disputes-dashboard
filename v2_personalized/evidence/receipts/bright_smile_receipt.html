@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt - Bright Smile Dental</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #006AFF;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .evidence-tag {
+            background: #E8F2FF;
+            color: #006AFF;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .receipt-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .verification {
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+        }
+        .amount {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Bright Smile Dental</h1>
+        <p>Payment Receipt</p>
+    </div>
+
+    <div class="evidence-tag">Square Evidence Record</div>
+
+    <div class="receipt-details">
+        <h2>Transaction Details</h2>
+        <p><strong>Transaction ID:</strong> trx_BSD20240215_800</p>
+        <p><strong>Date:</strong> February 15, 2024 11:30 AM PST</p>
+        <p><strong>Location:</strong> Main Clinic</p>
+        <p><strong>Patient:</strong> David Wilson</p>
+        
+        <div class="section">
+            <h3>Services & Charges</h3>
+            <table>
+                <tr>
+                    <td>Comprehensive Dental Exam (D0150)</td>
+                    <td class="amount">$150.00</td>
+                </tr>
+                <tr>
+                    <td>Full Set X-Rays (D0210)</td>
+                    <td class="amount">$350.00</td>
+                </tr>
+                <tr>
+                    <td>Professional Cleaning (D1110)</td>
+                    <td class="amount">$250.00</td>
+                </tr>
+                <tr>
+                    <td>Treatment Plan Consultation (D9310)</td>
+                    <td class="amount">$50.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtotal</strong></td>
+                    <td class="amount">$800.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Tax</strong></td>
+                    <td class="amount">$0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td class="amount"><strong>$800.00</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Payment Information</h3>
+            <p><strong>Method:</strong> VISA ****5432</p>
+            <p><strong>Card Present:</strong> Yes</p>
+            <p><strong>Authentication:</strong> Chip + PIN</p>
+            <p><strong>Authorization Code:</strong> 456789</p>
+        </div>
+
+        <div class="section">
+            <h3>Insurance Information</h3>
+            <ul>
+                <li><strong>Provider:</strong> Delta Dental</li>
+                <li><strong>Member ID:</strong> ****5678</li>
+                <li><strong>Claim Number:</strong> BSD-2024-02-15-800</li>
+                <li><strong>Claim Status:</strong> Submitted</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Additional Information</h3>
+            <ul>
+                <li>Insurance claim submitted on your behalf</li>
+                <li>Reimbursement will be processed within 2-3 weeks</li>
+                <li>Next recommended cleaning: August 15, 2024</li>
+                <li>Treatment plan provided separately</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="verification">
+        <p>This is an official Square payment record.</p>
+        <p>Transaction ID: trx_BSD20240215_800</p>
+        <p>Verification Code: SQ-BSD-2024-02-800</p>
+        <p>Generated: March 19, 2024 16:49:27</p>
+    </div>
+</body>
+</html>

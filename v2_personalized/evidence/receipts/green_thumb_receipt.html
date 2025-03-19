@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt - Green Thumb Garden Center</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #006AFF;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .evidence-tag {
+            background: #E8F2FF;
+            color: #006AFF;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .receipt-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .verification {
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+        }
+        .amount {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Green Thumb Garden Center</h1>
+        <p>Payment Receipt</p>
+    </div>
+
+    <div class="evidence-tag">Square Evidence Record</div>
+
+    <div class="receipt-details">
+        <h2>Transaction Details</h2>
+        <p><strong>Transaction ID:</strong> trx_GT20240220_450</p>
+        <p><strong>Date:</strong> February 20, 2024 10:15 AM PST</p>
+        <p><strong>Location:</strong> Main Center</p>
+        <p><strong>Order Number:</strong> GT-2024-02-450</p>
+        
+        <div class="section">
+            <h3>Items Purchased</h3>
+            <table>
+                <tr>
+                    <td>Japanese Maple Tree (5-gallon)</td>
+                    <td class="amount">$299.99</td>
+                </tr>
+                <tr>
+                    <td>Premium Potting Soil (2 bags)</td>
+                    <td class="amount">$79.98</td>
+                </tr>
+                <tr>
+                    <td>Organic Fertilizer Set</td>
+                    <td class="amount">$45.99</td>
+                </tr>
+                <tr>
+                    <td>Garden Tools Set</td>
+                    <td class="amount">$24.04</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtotal</strong></td>
+                    <td class="amount">$450.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Tax</strong></td>
+                    <td class="amount">$0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td class="amount"><strong>$450.00</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Payment Information</h3>
+            <p><strong>Method:</strong> VISA ****5432</p>
+            <p><strong>Card Present:</strong> Yes</p>
+            <p><strong>Authentication:</strong> Chip + PIN</p>
+            <p><strong>Authorization Code:</strong> 234567</p>
+        </div>
+
+        <div class="section">
+            <h3>Delivery Information</h3>
+            <p><strong>Delivery To:</strong></p>
+            <p>Michael Thompson<br>
+            456 Garden View Road<br>
+            San Francisco, CA 94112</p>
+            <p><strong>Delivery Method:</strong> Professional Garden Delivery Service</p>
+            <p><strong>Estimated Delivery:</strong> February 21-22, 2024</p>
+        </div>
+
+        <div class="section">
+            <h3>Additional Information</h3>
+            <ul>
+                <li>Professional delivery and placement included</li>
+                <li>90-day plant health guarantee</li>
+                <li>Free consultation with master gardener</li>
+                <li>Return policy: 30 days for unused items</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="verification">
+        <p>This is an official Square payment record.</p>
+        <p>Transaction ID: trx_GT20240220_450</p>
+        <p>Verification Code: SQ-GT-2024-02-450</p>
+        <p>Generated: March 19, 2024 16:49:27</p>
+    </div>
+</body>
+</html>

@@ -56,6 +56,11 @@ const mockSellers = {
                             exists: true,
                             date: "2024-02-20",
                             type: "payment_receipt"
+                        },
+                        product_ingredients: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "product_ingredients"
                         }
                     }
                 }
@@ -219,9 +224,15 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "not_as_described",
                     evidence: {
-                        product_photos: {
+                        product_description: {
                             exists: true,
-                            date: "2024-02-20"
+                            date: "2024-02-20",
+                            type: "product_description"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "payment_receipt"
                         }
                     }
                 }
@@ -246,9 +257,25 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "services_not_received",
                     evidence: {
+                        appointment_confirmation: {
+                            exists: true,
+                            date: "2024-02-10",
+                            type: "appointment_confirmation"
+                        },
                         service_record: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "service_record"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        },
+                        customer_agreement: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "customer_agreement"
                         }
                     }
                 },
@@ -266,7 +293,13 @@ const mockSellers = {
                     evidence: {
                         repair_documentation: {
                             exists: true,
-                            date: "2024-02-10"
+                            date: "2024-02-10",
+                            type: "repair_documentation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-10",
+                            type: "payment_receipt"
                         }
                     }
                 }
@@ -291,9 +324,20 @@ const mockSellers = {
                     cardPresent: false,
                     disputeReason: "product_not_received",
                     evidence: {
+                        order_confirmation: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "order_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "payment_receipt"
+                        },
                         shipping_confirmation: {
                             exists: true,
-                            date: "2024-02-21"
+                            date: "2024-02-21",
+                            type: "shipping_confirmation"
                         }
                     }
                 }
@@ -318,9 +362,15 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "not_as_described",
                     evidence: {
-                        product_photos: {
+                        product_description: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "product_description"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
                         }
                     }
                 }
@@ -345,9 +395,20 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "product_not_received",
                     evidence: {
+                        order_confirmation: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "order_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-20",
+                            type: "payment_receipt"
+                        },
                         delivery_confirmation: {
                             exists: true,
-                            date: "2024-02-21"
+                            date: "2024-02-21",
+                            type: "delivery_confirmation"
                         }
                     }
                 }
@@ -372,9 +433,20 @@ const mockSellers = {
                     cardPresent: false,
                     disputeReason: "product_not_received",
                     evidence: {
+                        order_confirmation: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "order_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        },
                         shipping_confirmation: {
                             exists: true,
-                            date: "2024-02-16"
+                            date: "2024-02-16",
+                            type: "shipping_confirmation"
                         }
                     }
                 }
@@ -401,7 +473,13 @@ const mockSellers = {
                     evidence: {
                         membership_agreement: {
                             exists: true,
-                            date: "2024-02-01"
+                            date: "2024-02-01",
+                            type: "membership_agreement"
+                        },
+                        payment_history: {
+                            exists: true,
+                            date: "2024-02-01",
+                            type: "payment_history"
                         }
                     }
                 }
@@ -428,7 +506,13 @@ const mockSellers = {
                     evidence: {
                         product_description: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "product_description"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
                         }
                     }
                 }
@@ -455,7 +539,13 @@ const mockSellers = {
                     evidence: {
                         transaction_records: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "transaction_records"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
                         }
                     }
                 }
@@ -480,9 +570,15 @@ const mockSellers = {
                     cardPresent: false,
                     disputeReason: "subscription_cancelled",
                     evidence: {
-                        class_registration: {
+                        membership_agreement: {
                             exists: true,
-                            date: "2024-02-01"
+                            date: "2024-02-01",
+                            type: "membership_agreement"
+                        },
+                        payment_history: {
+                            exists: true,
+                            date: "2024-02-01",
+                            type: "payment_history"
                         }
                     }
                 }
@@ -509,7 +605,13 @@ const mockSellers = {
                     evidence: {
                         product_description: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "product_description"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
                         }
                     }
                 }
@@ -534,9 +636,25 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "services_not_received",
                     evidence: {
+                        appointment_confirmation: {
+                            exists: true,
+                            date: "2024-02-10",
+                            type: "appointment_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        },
+                        customer_agreement: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "customer_agreement"
+                        },
                         appointment_record: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "service_record"
                         }
                     }
                 }
@@ -561,9 +679,20 @@ const mockSellers = {
                     cardPresent: false,
                     disputeReason: "product_not_received",
                     evidence: {
+                        order_confirmation: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "order_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        },
                         shipping_confirmation: {
                             exists: true,
-                            date: "2024-02-16"
+                            date: "2024-02-16",
+                            type: "shipping_confirmation"
                         }
                     }
                 }
@@ -588,9 +717,25 @@ const mockSellers = {
                     cardPresent: false,
                     disputeReason: "services_not_received",
                     evidence: {
-                        booking_confirmation: {
+                        appointment_confirmation: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "appointment_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        },
+                        customer_agreement: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "customer_agreement"
+                        },
+                        service_record: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "service_record"
                         }
                     }
                 }
@@ -615,9 +760,25 @@ const mockSellers = {
                     cardPresent: false,
                     disputeReason: "services_not_received",
                     evidence: {
-                        service_agreement: {
+                        appointment_confirmation: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "appointment_confirmation"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
+                        },
+                        customer_agreement: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "customer_agreement"
+                        },
+                        service_record: {
+                            exists: true,
+                            date: "2024-02-17",
+                            type: "service_record"
                         }
                     }
                 }
@@ -642,9 +803,15 @@ const mockSellers = {
                     cardPresent: true,
                     disputeReason: "not_as_described",
                     evidence: {
-                        product_certificate: {
+                        product_description: {
                             exists: true,
-                            date: "2024-02-15"
+                            date: "2024-02-15",
+                            type: "product_description"
+                        },
+                        payment_receipt: {
+                            exists: true,
+                            date: "2024-02-15",
+                            type: "payment_receipt"
                         }
                     }
                 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Receipt - Tech Hub Electronics</title>
+    <title>Payment Receipt - Fresh Bites Catering</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -51,20 +51,28 @@
         .detail-label {
             color: #666;
         }
-        .product-details {
+        .items {
             margin-bottom: 24px;
         }
-        .product-name {
-            font-size: 18px;
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .item-name {
             font-weight: 500;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
-        .product-info {
-            background: #fff;
-            border: 1px solid #e6e6e6;
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
+        .item-price {
+            font-weight: 500;
+            margin-left: 24px;
         }
         .totals {
             margin-top: 24px;
@@ -105,7 +113,7 @@
         <div class="evidence-banner">Square Evidence Record</div>
         
         <div class="header">
-            <h1>Tech Hub Electronics</h1>
+            <h1>Fresh Bites Catering</h1>
             <p>Payment Receipt</p>
         </div>
 
@@ -113,55 +121,57 @@
             <h2>Receipt Information</h2>
             <div class="detail-row">
                 <span class="detail-label">Transaction ID:</span>
-                <span>TH-2024-02-28-001-PMT</span>
+                <span>FB-2024-03-01-001-PMT</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Date:</span>
-                <span>February 28, 2024 2:30 PM PST</span>
+                <span>March 1, 2024 10:15 AM PST</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Location:</span>
-                <span>Main Store</span>
+                <span>Downtown Kitchen</span>
             </div>
         </div>
 
-        <div class="product-details">
-            <div class="product-name">MacBook Pro 14" (2024)</div>
-            <div class="product-info">
-                <div class="detail-row">
-                    <span class="detail-label">Model:</span>
-                    <span>MPHG3LL/A</span>
+        <div class="items">
+            <h2>Order Items</h2>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Gourmet Sandwich Platter (25 servings)</div>
                 </div>
-                <div class="detail-row">
-                    <span class="detail-label">Specifications:</span>
-                    <span>M3 Pro, 18GB RAM, 512GB SSD</span>
+                <div class="item-price">$300.00</div>
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Fresh Garden Salad (25 servings)</div>
                 </div>
-                <div class="detail-row">
-                    <span class="detail-label">Serial Number:</span>
-                    <span>C02XR1YPQWER</span>
+                <div class="item-price">$200.00</div>
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Assorted Cookies (25 servings)</div>
                 </div>
-                <div class="detail-row">
-                    <span class="detail-label">Warranty:</span>
-                    <span>1-Year Limited Warranty (Expires: Feb 28, 2025)</span>
+                <div class="item-price">$125.00</div>
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Beverages (30 units)</div>
                 </div>
+                <div class="item-price">$90.00</div>
             </div>
 
             <div class="totals">
                 <div class="total-row">
-                    <span>Product Price</span>
-                    <span>$1,199.99</span>
+                    <span>Subtotal</span>
+                    <span>$715.00</span>
                 </div>
                 <div class="total-row">
-                    <span>AppleCare+ (3 Years)</span>
-                    <span>$100.00</span>
-                </div>
-                <div class="total-row">
-                    <span>Tax (8.5%)</span>
-                    <span>$110.50</span>
+                    <span>Tax (4.9%)</span>
+                    <span>$35.00</span>
                 </div>
                 <div class="total-row final">
                     <span>Total</span>
-                    <span>$1,299.99</span>
+                    <span>$750.00</span>
                 </div>
             </div>
         </div>
@@ -170,21 +180,21 @@
             <h3>Payment Information</h3>
             <div class="detail-row">
                 <span class="detail-label">Payment Method:</span>
-                <span>Visa ****5678</span>
+                <span>Visa ****1234</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Card Present:</span>
-                <span>Yes - Chip Read</span>
+                <span>No - Online payment</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Authorization:</span>
-                <span>Approved (Auth code: 789012)</span>
+                <span>Approved (Auth code: 123456)</span>
             </div>
         </div>
 
         <div class="verification">
-            <p>This is an official payment receipt from Tech Hub Electronics, processed through Square on February 28, 2024 at 2:30 PM PST.</p>
-            <p>Verification Code: TH-2024-02-28-001-PMT-SQ</p>
+            <p>This is an official payment receipt from Fresh Bites Catering, processed through Square on March 1, 2024 at 10:15 AM PST.</p>
+            <p>Verification Code: FB-2024-03-01-001-PMT-SQ</p>
         </div>
     </div>
 </body>

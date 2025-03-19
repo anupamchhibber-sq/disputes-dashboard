@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment History - Zen Yoga Studio</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #006AFF;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .evidence-tag {
+            background: #E8F2FF;
+            color: #006AFF;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .payment-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .verification {
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .amount {
+            text-align: right;
+        }
+        .status {
+            text-align: center;
+        }
+        .success {
+            color: #2E7D32;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Zen Yoga Studio</h1>
+        <p>Payment History</p>
+    </div>
+
+    <div class="evidence-tag">Square Evidence Record</div>
+
+    <div class="payment-details">
+        <h2>Membership Payment History</h2>
+        <p><strong>Member:</strong> Lisa Chen</p>
+        <p><strong>Membership Type:</strong> Monthly Unlimited</p>
+        <p><strong>Start Date:</strong> February 1, 2024</p>
+        <p><strong>Monthly Fee:</strong> $200.00</p>
+        
+        <div class="section">
+            <h3>Payment Records</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Payment Method</th>
+                        <th>Status</th>
+                        <th class="amount">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Feb 1, 2024</td>
+                        <td>Monthly Membership - February</td>
+                        <td>VISA ****7890</td>
+                        <td class="status success">✓ Successful</td>
+                        <td class="amount">$200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Feb 1, 2024</td>
+                        <td>Membership Initiation Fee</td>
+                        <td>VISA ****7890</td>
+                        <td class="status success">✓ Successful</td>
+                        <td class="amount">$50.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Transaction Details</h3>
+            <p><strong>February Payment:</strong></p>
+            <ul>
+                <li><strong>Transaction ID:</strong> trx_ZY20240201_200</li>
+                <li><strong>Authorization Code:</strong> 876543</li>
+                <li><strong>Card Present:</strong> No</li>
+                <li><strong>Time:</strong> February 1, 2024 9:00 AM PST</li>
+            </ul>
+            <p><strong>Initiation Fee:</strong></p>
+            <ul>
+                <li><strong>Transaction ID:</strong> trx_ZY20240201_50</li>
+                <li><strong>Authorization Code:</strong> 876544</li>
+                <li><strong>Card Present:</strong> No</li>
+                <li><strong>Time:</strong> February 1, 2024 9:00 AM PST</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Membership Benefits</h3>
+            <ul>
+                <li>Unlimited yoga classes</li>
+                <li>Access to members-only workshops</li>
+                <li>10% discount on retail items</li>
+                <li>Free mat and towel service</li>
+                <li>Priority class registration</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Payment Schedule</h3>
+            <ul>
+                <li>Billing occurs on the 1st of each month</li>
+                <li>Next scheduled payment: March 1, 2024</li>
+                <li>Payment method: Auto-pay with card on file</li>
+                <li>Cancellation requires 30-day notice</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="verification">
+        <p>This is an official Square payment record.</p>
+        <p>Member ID: ZY-2024-02-200</p>
+        <p>Verification Code: SQ-ZY-2024-02-200</p>
+        <p>Generated: March 19, 2024 16:49:27</p>
+    </div>
+</body>
+</html>
