@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Dispute - Square Seller Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f1f1f;
+            line-height: 1.4;
+            background: white;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header-image {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .progress-section {
+            text-align: center;
+            flex: 1;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .progress-count {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e6e6e6;
+            z-index: -1;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-left: 0;
+            margin-bottom: 16px;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .bullet-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #666;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 8px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #0B74FF;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .button {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+
+        .button-secondary {
+            background: #f0f0f0;
+            color: #1f1f1f;
+        }
+
+        .button-primary {
+            background: #0B74FF;
+            color: white;
+        }
+
+        .checkbox-group {
+            margin: 20px 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .checkbox-input {
+            margin-top: 3px;
+        }
+
+        .pro-tip {
+            background: #f8f8f8;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .top-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .top-button {
+            background: none;
+            border: none;
+            color: #0B74FF;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .top-button.submit {
+            background: #0B74FF;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <button class="close-button" onclick="window.history.back()">×</button>
+    
+    <div class="top-buttons">
+        <button class="top-button">Save for later</button>
+        <button class="top-button submit">Submit</button>
+    </div>
+
+    <div class="header">
+        <img src="shield-icon.svg" alt="Shield Icon" class="header-image">
+        <h1 id="disputeTitle">Let's challenge this dispute</h1>
+        <p>SLA FPO.</p>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-line"></div>
+        <div class="progress-section">
+            <div class="progress-label">Required</div>
+            <div class="progress-count">0/1</div>
+        </div>
+        <div class="progress-section">
+            <div class="progress-label">Optional</div>
+            <div class="progress-count">0/2</div>
+        </div>
+    </div>
+
+    <form id="sspForm" onsubmit="return false;">
+        <div class="form-section">
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" class="checkbox-input">
+                    <div>
+                        <h3>Include your account of what happened:</h3>
+                        <ul class="bullet-list">
+                            <li>What was the transaction for? List out the goods or services provided.</li>
+                            <li>What did you deliver to your customer?</li>
+                            <li>Is there any additional context you have on what happened with the card holder?</li>
+                        </ul>
+                        <textarea placeholder="Additional information"></textarea>
+                        <div class="action-buttons">
+                            <button type="button" class="button button-secondary">Cancel</button>
+                            <button type="button" class="button button-primary">Save</button>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" class="checkbox-input">
+                    <div>
+                        <h3>OPTIONAL: Key evidence was already collected on your behalf, but if you have additional key or supporting evidence, you can add it here.</h3>
+                        <div class="pro-tip">
+                            Pro-tip: Only add supporting evidence if it adds significant context to key evidence you're providing.
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" class="checkbox-input">
+                    <div>
+                        All of the information and documentation submitted in or with this form is true, accurate and complete. I understand that submitting the requested information and/or documentation does not guarantee a resolution in my favor and that the card-issuing bank - not Square - makes the final decision on payment disputes. By submitting this form, I understand that I am unable to add additional information or documentation to this case.
+                    </div>
+                </label>
+            </div>
+        </div>
+    </form>
+
+    <script src="data.js"></script>
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const disputeId = urlParams.get('disputeId');
+        const sellerId = urlParams.get('sellerId');
+
+        if (!disputeId || !sellerId) {
+            console.error('Missing required URL parameters');
+            document.querySelector('.header p').textContent = 'Error: Missing parameters';
+            throw new Error('Missing URL parameters');
+        }
+
+        // Set the correct seller
+        mockData.setSeller(sellerId);
+
+        // Find the current dispute
+        const dispute = mockData.disputes.open.find(d => d.id === disputeId);
+        if (!dispute) {
+            console.error('Dispute not found');
+            document.querySelector('.header p').textContent = 'Error: Dispute not found';
+            throw new Error('Dispute not found');
+        }
+
+        // Update the title based on dispute reason
+        const disputeTitle = document.getElementById('disputeTitle');
+        disputeTitle.textContent = `Let's challenge this ${dispute.disputeReason.replace(/_/g, ' ')} dispute`;
+    </script>
+</body>
+</html>

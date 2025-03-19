@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Viewer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .address {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .document-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #0B74FF;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        th {
+            background: #f0f0f0;
+            font-weight: 500;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .verification-banner {
+            margin-top: 40px;
+            padding: 20px;
+            background: #E8F2FF;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .verification-banner .title {
+            font-weight: bold;
+            color: #0B74FF;
+            margin-bottom: 10px;
+        }
+        .verification-banner .code {
+            font-family: monospace;
+            font-size: 16px;
+            color: #1f1f1f;
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .evidence-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #E8F2FF;
+            color: #0B74FF;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .square-verification {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: #666;
+        }
+        .square-verification img {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">${BUSINESS_NAME}</div>
+        <div class="address">
+            ${BUSINESS_ADDRESS}<br>
+            ${BUSINESS_CITY}, ${BUSINESS_STATE} ${BUSINESS_ZIP}<br>
+            ${BUSINESS_PHONE}
+        </div>
+    </div>
+
+    <div class="evidence-tag">VERIFIED EVIDENCE</div>
+    <div class="timestamp">Generated on ${TIMESTAMP}</div>
+
+    <div class="document-title">
+        ${DOCUMENT_TITLE}
+    </div>
+
+    ${DOCUMENT_CONTENT}
+
+    <div class="verification-banner">
+        <div class="title">Square Evidence Verification</div>
+        <div>This document has been verified by Square</div>
+        <div class="code">${VERIFICATION_CODE}</div>
+        <div>Verify this document at square.com/verify</div>
+    </div>
+
+    <div class="footer">
+        <div class="square-verification">
+            <span>Verified by</span>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKESURBVGiB7Zk7aBRRFIb/M7ObxKhBRRE1aB67GwtBsLCzEGxEEEUQJZYKIoKID0QQRYJgYykiNnZaWPgABRUFwcLORh9gfCQGNOCuRjf7ODZ7LWYDm83u7M7szOxu4v1gYO89557zz51779w7gKIoiqIoiqIoyv+JsHpwsVjcbprmNSHELiHEBmNwWwdwFcBpAE8cx9lqGMZTr7HCa8B8Pn8ewEm/k3fBOoBzRHQ3nU7v9xrk6QFjzJ5KpfLQdd1NvQYEgJ2u66YBPMxkMjt6CfT6jDHGvwC4AGBtrwP3wHoAFwE8MgzjT7eBXT0gpdwD4DGA0V5m5pNxAEVr7e5ugrp6wHXd0wDW9SUt/4wAONVtUEcPSCnHALwGMNjvzHxSBbDVsqzX7QZ09MCgMIqAkwcAA8CRTp29bEKbpZR7/c7ID4ZhbEomk3s69SVaG6SU+wAcFEKMAHhORA+llC+6mTQajW4kop0ADhDRHgDvXNe9k8vlXvl9D9M0twE4BODQP9f3AHgG4H4ul/vYzVy2bW8QQhwBcADABIB3AO5ZlvWg7WCvB5pMJnOZTOYFgBEhxJhpmocBHM/n8/f6kK8/IpHIZQAQQowbhnEEwIlcLne7X3OEYvfp5gEp5SQRPQewKRQJ+cRxnG2GYXwLxQO2bX+XUk4S0aswJEREX2zbngzFA0Q0BWA6DPK1ENH0v3sEQvGAbduTRPQSwHgY5AGAiCaEEC9t2w7HA0KIKQDToUh2BhFNhyL5ZpLJ5EkiehKGbC1E9CSVSp0KxQPRaHQKwPcwZGv5EY/HT4fiASHETwA/w5CtpVqtTobiAUVRFEVRFEVRFEVRFEVRFEVR/iv+AoLsAy4GtOX5AAAAAElFTkSuQmCC" alt="Square Logo">
+        </div>
+    </div>
+</body>
+</html>
