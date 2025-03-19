@@ -4,69 +4,198 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Receipt - Fresh Bites Catering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 40px;
+            color: #1f1f1f;
+        }
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+        }
+        .evidence-banner {
+            background: #E8F2FF;
+            color: #0B74FF;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            font-size: 14px;
         }
         .header {
-            background: #006AFF;
-            color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            margin-bottom: 32px;
         }
-        .evidence-tag {
-            background: #E8F2FF;
-            color: #006AFF;
-            padding: 4px 8px;
-            border-radius: 4px;
+        .header h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+        }
+        .receipt-details {
+            background: #f7f7f7;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        .receipt-details h2 {
+            font-size: 18px;
+            margin: 0 0 16px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
             font-size: 14px;
-            display: inline-block;
-            margin-bottom: 20px;
         }
-        .payment-details {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+        .detail-label {
+            color: #666;
+        }
+        .items {
+            margin-bottom: 24px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e6e6e6;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .item-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .item-price {
+            font-weight: 500;
+            margin-left: 24px;
+        }
+        .totals {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .total-row.final {
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e6e6e6;
         }
         .verification {
-            color: #666;
             font-size: 14px;
-            border-top: 1px solid #ddd;
-            margin-top: 20px;
-            padding-top: 20px;
+            color: #666;
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .payment-info {
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 24px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Fresh Bites Catering</h1>
-        <p>Payment Receipt</p>
-    </div>
+    <div class="container">
+        <div class="evidence-banner">Square Evidence Record</div>
+        
+        <div class="header">
+            <h1>Fresh Bites Catering</h1>
+            <p>Payment Receipt</p>
+        </div>
 
-    <div class="evidence-tag">Square Evidence Record</div>
+        <div class="receipt-details">
+            <h2>Receipt Information</h2>
+            <div class="detail-row">
+                <span class="detail-label">Transaction ID:</span>
+                <span>FB-2024-03-01-001-PMT</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date:</span>
+                <span>March 1, 2024 10:15 AM PST</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span>Downtown Kitchen</span>
+            </div>
+        </div>
 
-    <div class="payment-details">
-        <h2>Payment Details</h2>
-        <p><strong>Transaction ID:</strong> trx_FB20240301_750</p>
-        <p><strong>Date:</strong> March 1, 2024 14:30 PST</p>
-        <p><strong>Amount:</strong> $750.00</p>
-        <p><strong>Payment Method:</strong> VISA ****1234</p>
-        <p><strong>Card Present:</strong> No</p>
-        <p><strong>Location:</strong> Downtown Kitchen</p>
-        <p><strong>Order Reference:</strong> FB-2024-03-001</p>
-    </div>
+        <div class="items">
+            <h2>Order Items</h2>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Gourmet Sandwich Platter (25 servings)</div>
+                </div>
+                <div class="item-price">$300.00</div>
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Fresh Garden Salad (25 servings)</div>
+                </div>
+                <div class="item-price">$200.00</div>
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Assorted Cookies (25 servings)</div>
+                </div>
+                <div class="item-price">$125.00</div>
+            </div>
+            <div class="item">
+                <div class="item-details">
+                    <div class="item-name">Beverages (30 units)</div>
+                </div>
+                <div class="item-price">$90.00</div>
+            </div>
 
-    <div class="verification">
-        <p>This is an official Square payment record.</p>
-        <p>Card processed through Square Terminal</p>
-        <p>Authorization Code: AUTH-FB-2024-03-01-750</p>
-        <p>Generated: March 19, 2024 16:49:27</p>
+            <div class="totals">
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span>$715.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax (4.9%)</span>
+                    <span>$35.00</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total</span>
+                    <span>$750.00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-info">
+            <h3>Payment Information</h3>
+            <div class="detail-row">
+                <span class="detail-label">Payment Method:</span>
+                <span>Visa ****1234</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Card Present:</span>
+                <span>No - Online payment</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Authorization:</span>
+                <span>Approved (Auth code: 123456)</span>
+            </div>
+        </div>
+
+        <div class="verification">
+            <p>This is an official payment receipt from Fresh Bites Catering, processed through Square on March 1, 2024 at 10:15 AM PST.</p>
+            <p>Verification Code: FB-2024-03-01-001-PMT-SQ</p>
+        </div>
     </div>
 </body>
 </html>

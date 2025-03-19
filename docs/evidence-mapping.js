@@ -9,7 +9,7 @@ const BASE_EVIDENCE = {
                 name: 'Service Appointment/Booking Confirmation',
                 description: 'Confirmation of scheduled service',
                 is_key: true,
-                file_exists: true  // Add this flag to track actual file existence
+                file_exists: true
             },
             {
                 type: 'payment_receipt',
@@ -36,6 +36,25 @@ const BASE_EVIDENCE = {
                 file_exists: false
             }
         ]
+    },
+    'duplicate': {
+        square_provided: [
+            {
+                type: 'transaction_records',
+                name: 'Transaction Records',
+                description: 'Records showing duplicate transactions',
+                is_key: true,
+                file_exists: true
+            },
+            {
+                type: 'payment_receipt',
+                name: 'Original Payment Receipt',
+                description: 'Receipt from the original transaction',
+                is_key: true,
+                file_exists: true
+            }
+        ],
+        merchant_provided: []
     },
     'product_not_received': {
         square_provided: [
@@ -92,6 +111,34 @@ const BASE_EVIDENCE = {
                 file_exists: false
             }
         ]
+    },
+    'subscription_cancelled': {
+        square_provided: [
+            {
+                type: 'membership_agreement',
+                name: 'Membership Agreement',
+                description: 'Signed membership contract with cancellation terms',
+                is_key: true,
+                file_exists: true
+            },
+            {
+                type: 'payment_history',
+                name: 'Payment History',
+                description: 'Record of membership payments',
+                is_key: true,
+                file_exists: true
+            }
+        ],
+        merchant_provided: [
+            {
+                type: 'cancellation_policy',
+                name: 'Cancellation Policy',
+                description: 'Business cancellation policy',
+                help_text: 'Include your standard cancellation policy and terms',
+                is_key: false,
+                file_exists: false
+            }
+        ]
     }
 };
 
@@ -137,36 +184,6 @@ const INDUSTRY_EVIDENCE = {
                     description: 'Receipt showing product details and serial number',
                     is_key: true,
                     file_exists: true
-                }
-            ]
-        }
-    },
-    'health_and_fitness': {
-        'subscription_cancelled': {
-            square_provided: [
-                {
-                    type: 'membership_agreement',
-                    name: 'Membership Agreement',
-                    description: 'Signed membership contract with cancellation terms',
-                    is_key: true,
-                    file_exists: true
-                },
-                {
-                    type: 'payment_history',
-                    name: 'Payment History',
-                    description: 'Record of membership payments',
-                    is_key: true,
-                    file_exists: true
-                }
-            ],
-            merchant_provided: [
-                {
-                    type: 'cancellation_policy',
-                    name: 'Cancellation Policy',
-                    description: 'Gym\'s official cancellation policy',
-                    help_text: 'Include your standard cancellation policy and terms',
-                    is_key: false,
-                    file_exists: false
                 }
             ]
         }

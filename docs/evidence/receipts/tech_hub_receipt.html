@@ -4,162 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Receipt - Tech Hub Electronics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 40px;
+            color: #1f1f1f;
+        }
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
         }
-
-        .receipt {
-            border: 1px solid #ddd;
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1f1f1f;
-            margin-bottom: 10px;
-        }
-
-        .store-info {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .square-verified {
-            background: #00b300;
-            color: white;
+        .evidence-banner {
+            background: #E8F2FF;
+            color: #0B74FF;
             padding: 8px 16px;
             border-radius: 4px;
-            display: inline-block;
-            margin-top: 10px;
+            margin-bottom: 24px;
             font-size: 14px;
         }
-
-        .square-verified img {
-            vertical-align: middle;
-            margin-right: 6px;
+        .header {
+            margin-bottom: 32px;
         }
-
+        .header h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+        }
         .receipt-details {
-            margin-bottom: 30px;
+            background: #f7f7f7;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 24px;
         }
-
-        .receipt-row {
+        .receipt-details h2 {
+            font-size: 18px;
+            margin: 0 0 16px 0;
+        }
+        .detail-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 5px 0;
+            margin-bottom: 12px;
+            font-size: 14px;
         }
-
-        .receipt-row.total {
-            border-top: 2px solid #f0f0f0;
-            margin-top: 20px;
-            padding-top: 20px;
-            font-weight: bold;
+        .detail-label {
+            color: #666;
         }
-
-        .payment-info {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f0f0;
+        .product-details {
+            margin-bottom: 24px;
         }
-
-        .payment-method {
-            background: #f8f8f8;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
+        .product-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
         }
-
-        .payment-row {
+        .product-info {
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        .totals {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .total-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
             font-size: 14px;
-            color: #444;
         }
-
-        .timestamp {
-            text-align: center;
-            color: #666;
+        .total-row.final {
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .verification {
             font-size: 14px;
-            margin-top: 30px;
+            color: #666;
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #e6e6e6;
+        }
+        .payment-info {
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 24px;
         }
     </style>
 </head>
 <body>
-    <div class="receipt">
+    <div class="container">
+        <div class="evidence-banner">Square Evidence Record</div>
+        
         <div class="header">
-            <div class="logo">Tech Hub Electronics</div>
-            <div class="store-info">
-                123 Tech Avenue<br>
-                San Francisco, CA 94105<br>
-                (415) 555-0123
-            </div>
-            <div class="square-verified">
-                ✓ Verified by Square
-            </div>
+            <h1>Tech Hub Electronics</h1>
+            <p>Payment Receipt</p>
         </div>
 
         <div class="receipt-details">
-            <div class="receipt-row">
-                <div>MacBook Pro M3 Pro 14"</div>
-                <div>$1,299.99</div>
+            <h2>Receipt Information</h2>
+            <div class="detail-row">
+                <span class="detail-label">Transaction ID:</span>
+                <span>TH-2024-02-28-001-PMT</span>
             </div>
-            <div class="receipt-row">
-                <div>AppleCare+ (3 Years)</div>
-                <div>$299.00</div>
+            <div class="detail-row">
+                <span class="detail-label">Date:</span>
+                <span>February 28, 2024 2:30 PM PST</span>
             </div>
-            <div class="receipt-row">
-                <div>Subtotal</div>
-                <div>$1,598.99</div>
+            <div class="detail-row">
+                <span class="detail-label">Location:</span>
+                <span>Main Store</span>
             </div>
-            <div class="receipt-row">
-                <div>Sales Tax (8.5%)</div>
-                <div>$135.91</div>
+        </div>
+
+        <div class="product-details">
+            <div class="product-name">MacBook Pro 14" (2024)</div>
+            <div class="product-info">
+                <div class="detail-row">
+                    <span class="detail-label">Model:</span>
+                    <span>MPHG3LL/A</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Specifications:</span>
+                    <span>M3 Pro, 18GB RAM, 512GB SSD</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Serial Number:</span>
+                    <span>C02XR1YPQWER</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Warranty:</span>
+                    <span>1-Year Limited Warranty (Expires: Feb 28, 2025)</span>
+                </div>
             </div>
-            <div class="receipt-row total">
-                <div>Total</div>
-                <div>$1,734.90</div>
+
+            <div class="totals">
+                <div class="total-row">
+                    <span>Product Price</span>
+                    <span>$1,199.99</span>
+                </div>
+                <div class="total-row">
+                    <span>AppleCare+ (3 Years)</span>
+                    <span>$100.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Tax (8.5%)</span>
+                    <span>$110.50</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total</span>
+                    <span>$1,299.99</span>
+                </div>
             </div>
         </div>
 
         <div class="payment-info">
-            <div class="payment-method">
-                <div class="payment-row">
-                    <div>Payment Method</div>
-                    <div>Visa •••• 4242</div>
-                </div>
-                <div class="payment-row">
-                    <div>Card Present</div>
-                    <div>Yes</div>
-                </div>
-                <div class="payment-row">
-                    <div>Authentication</div>
-                    <div>Chip + PIN</div>
-                </div>
-                <div class="payment-row">
-                    <div>Transaction ID</div>
-                    <div>TXN_20240228_1234567</div>
-                </div>
+            <h3>Payment Information</h3>
+            <div class="detail-row">
+                <span class="detail-label">Payment Method:</span>
+                <span>Visa ****5678</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Card Present:</span>
+                <span>Yes - Chip Read</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Authorization:</span>
+                <span>Approved (Auth code: 789012)</span>
             </div>
         </div>
 
-        <div class="timestamp">
-            Transaction completed on February 28, 2024 at 2:15 PM PST
+        <div class="verification">
+            <p>This is an official payment receipt from Tech Hub Electronics, processed through Square on February 28, 2024 at 2:30 PM PST.</p>
+            <p>Verification Code: TH-2024-02-28-001-PMT-SQ</p>
         </div>
     </div>
 </body>

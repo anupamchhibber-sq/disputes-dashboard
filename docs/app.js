@@ -140,19 +140,15 @@ function renderDetailBlade() {
 }
 
 function showInterstitial() {
+    const dispute = mockData.selectedDispute;
     const currentSeller = mockData.currentSeller;
-    if (!currentSeller || !currentSeller.id) {
-        console.error('No seller selected');
+    
+    if (!dispute || !currentSeller) {
+        console.error('Missing dispute or seller');
         return;
     }
     
-    const disputeId = mockData.getCurrentDisputeId();
-    if (!disputeId) {
-        console.error('No dispute selected');
-        return;
-    }
-    
-    window.location.href = `interstitial.html?disputeId=${disputeId}&sellerId=${currentSeller.id}`;
+    window.location.href = `interstitial.html?disputeId=${dispute.id}&sellerId=${currentSeller.id}`;
 }
 
 function selectDispute(disputeId) {

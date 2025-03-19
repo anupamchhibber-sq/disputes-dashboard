@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Records - Daily Grind Coffee</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #006AFF;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .evidence-tag {
+            background: #E8F2FF;
+            color: #006AFF;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .transaction-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .verification {
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .amount {
+            text-align: right;
+        }
+        .highlight {
+            background-color: #FFF3E0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Daily Grind Coffee</h1>
+        <p>Transaction Records</p>
+    </div>
+
+    <div class="evidence-tag">Square Evidence Record</div>
+
+    <div class="transaction-details">
+        <h2>Transaction Analysis</h2>
+        <p><strong>Customer Card:</strong> VISA ****8765</p>
+        <p><strong>Subscription Plan:</strong> Coffee Bean Subscription (3 months)</p>
+        
+        <div class="section">
+            <h3>Transaction Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detail</th>
+                        <th>Original Transaction</th>
+                        <th>Duplicate Transaction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Transaction ID</td>
+                        <td>trx_DG20240215_150A</td>
+                        <td class="highlight">trx_DG20240215_150B</td>
+                    </tr>
+                    <tr>
+                        <td>Date & Time</td>
+                        <td>Feb 15, 2024 9:30:15 AM PST</td>
+                        <td class="highlight">Feb 15, 2024 9:30:17 AM PST</td>
+                    </tr>
+                    <tr>
+                        <td>Amount</td>
+                        <td>$150.00</td>
+                        <td class="highlight">$150.00</td>
+                    </tr>
+                    <tr>
+                        <td>Card Number</td>
+                        <td>VISA ****8765</td>
+                        <td class="highlight">VISA ****8765</td>
+                    </tr>
+                    <tr>
+                        <td>Authorization Code</td>
+                        <td>789012</td>
+                        <td class="highlight">789013</td>
+                    </tr>
+                    <tr>
+                        <td>Order Number</td>
+                        <td>DG-2024-02-150A</td>
+                        <td class="highlight">DG-2024-02-150B</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Duplicate Transaction Analysis</h3>
+            <ul>
+                <li><strong>Time Difference:</strong> 2 seconds between transactions</li>
+                <li><strong>Transaction Method:</strong> Online payment (card not present)</li>
+                <li><strong>System Error:</strong> Network timeout caused double submission</li>
+                <li><strong>Duplicate Status:</strong> Second transaction identified as duplicate</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Item Details (Both Transactions)</h3>
+            <table>
+                <tr>
+                    <td>Coffee Bean Subscription (3 months)</td>
+                    <td class="amount">$150.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtotal</strong></td>
+                    <td class="amount">$150.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Tax</strong></td>
+                    <td class="amount">$0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td class="amount"><strong>$150.00</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>System Notes</h3>
+            <ul>
+                <li>Network timeout detected at 9:30:16 AM PST</li>
+                <li>Duplicate transaction flagged by system</li>
+                <li>Same subscription plan processed twice</li>
+                <li>Second transaction eligible for automatic refund</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="verification">
+        <p>This is an official Square transaction record.</p>
+        <p>Analysis Generated: March 19, 2024 16:49:27</p>
+        <p>Verification Code: SQ-DG-2024-02-150-DUP</p>
+    </div>
+</body>
+</html>

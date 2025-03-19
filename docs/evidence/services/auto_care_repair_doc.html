@@ -34,7 +34,7 @@
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        .repair-section {
+        .section {
             background: #e9ecef;
             padding: 15px;
             border-radius: 4px;
@@ -61,48 +61,82 @@
         <h2>Repair Information</h2>
         <p><strong>Repair Order:</strong> ACP-2024-02-800</p>
         <p><strong>Service Date:</strong> February 10, 2024</p>
-        <p><strong>Vehicle:</strong> 2020 Honda Civic</p>
-        <p><strong>VIN:</strong> 2HGES12345H123456</p>
-        <p><strong>Mileage:</strong> 45,123</p>
+        <p><strong>Amount:</strong> $800.00</p>
         
-        <div class="repair-section">
-            <h3>Repair Details</h3>
-            <p><strong>Issue Reported:</strong> Check Engine Light On, Rough Idle</p>
-            <p><strong>Diagnostic Results:</strong></p>
+        <div class="section">
+            <h3>Vehicle Information</h3>
             <ul>
-                <li>OBD Code P0301 - Cylinder 1 Misfire Detected</li>
-                <li>Spark plug inspection showed wear beyond service limit</li>
-                <li>Ignition coil testing showed degraded performance</li>
-            </ul>
-            <p><strong>Repairs Performed:</strong></p>
-            <ul>
-                <li>Replaced all spark plugs with OEM Honda parts</li>
-                <li>Replaced ignition coil for cylinder 1</li>
-                <li>Performed computer reset and system check</li>
-                <li>Test drive to confirm repair success</li>
+                <li><strong>Make/Model:</strong> 2020 Honda Civic</li>
+                <li><strong>VIN:</strong> 2HGES12345H123456</li>
+                <li><strong>Mileage In:</strong> 45,123</li>
+                <li><strong>Mileage Out:</strong> 45,145</li>
+                <li><strong>Color:</strong> Modern Steel Metallic</li>
             </ul>
         </div>
 
-        <div class="repair-section">
-            <h3>Parts Used</h3>
+        <div class="section">
+            <h3>Initial Diagnosis</h3>
             <ul>
-                <li>4x NGK Spark Plugs (OEM Honda spec)</li>
-                <li>1x Ignition Coil (Honda OEM)</li>
-                <li>Misc shop supplies</li>
+                <li><strong>Customer Complaint:</strong> Check Engine Light On, Rough Idle</li>
+                <li><strong>Diagnostic Results:</strong>
+                    <ul>
+                        <li>OBD Code P0301 - Cylinder 1 Misfire Detected</li>
+                        <li>OBD Code P0300 - Random/Multiple Cylinder Misfire</li>
+                        <li>Spark plug inspection showed excessive wear</li>
+                        <li>Ignition coil testing showed degraded performance</li>
+                    </ul>
+                </li>
             </ul>
-            <p><strong>Warranty:</strong> 12 months/12,000 miles on parts and labor</p>
         </div>
 
-        <div class="repair-section">
+        <div class="section">
+            <h3>Repairs Performed</h3>
+            <ul>
+                <li>Replaced all spark plugs
+                    <ul>
+                        <li>Used NGK Laser Iridium (OEM spec)</li>
+                        <li>Gapped to manufacturer specifications</li>
+                        <li>Torqued to proper specifications</li>
+                    </ul>
+                </li>
+                <li>Replaced ignition coil for cylinder 1
+                    <ul>
+                        <li>Used Honda OEM coil</li>
+                        <li>Tested remaining coils - within spec</li>
+                    </ul>
+                </li>
+                <li>Additional Services
+                    <ul>
+                        <li>Cleaned throttle body</li>
+                        <li>Performed computer reset</li>
+                        <li>Updated ECU software</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
             <h3>Quality Verification</h3>
             <p><strong>Post-Repair Checks:</strong></p>
             <ul>
                 <li>Engine computer shows no error codes</li>
-                <li>Idle speed and smoothness within specification</li>
+                <li>Idle speed: 750 RPM (within spec)</li>
+                <li>Compression test: All cylinders within spec</li>
                 <li>Test drive confirms normal operation</li>
             </ul>
             <p><strong>Technician:</strong> Robert Chen</p>
             <p><strong>ASE Certification:</strong> Master Technician #ASE123456</p>
+        </div>
+
+        <div class="section">
+            <h3>Parts Used</h3>
+            <ul>
+                <li>4x NGK Laser Iridium Spark Plugs</li>
+                <li>1x Honda OEM Ignition Coil</li>
+                <li>Throttle Body Cleaner</li>
+                <li>Misc shop supplies</li>
+            </ul>
+            <p><strong>Warranty:</strong> 12 months/12,000 miles on parts and labor</p>
         </div>
     </div>
 
