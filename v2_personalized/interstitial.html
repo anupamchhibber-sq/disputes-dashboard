@@ -273,19 +273,11 @@
                 <h3>Pro-tip</h3>
                 <p>Only add supporting evidence if it adds significant context to key evidence you're providing.</p>
             </div>
-            <div class="evidence-section">
+            <div class="evidence-section" id="keyEvidenceSection">
                 <h3>Key evidence</h3>
-                <div class="evidence-item-modal"><span class="checkmark">✓</span> Goods and services confirmation</div>
-                <div class="evidence-item-modal"><span class="checkmark">✓</span> Service agreements and contracts</div>
-                <div class="evidence-item-modal"><span class="checkmark">✓</span> Timestamped and dated proof of service delivery</div>
-                <div class="evidence-item-modal"><span class="checkmark">✓</span> Itemized invoice or statement of work</div>
             </div>
-            <div class="evidence-section">
+            <div class="evidence-section" id="supportingEvidenceSection">
                 <h3>Supporting evidence</h3>
-                <div class="evidence-item-modal"><span class="plus">+</span> Text message or email conversations</div>
-                <div class="evidence-item-modal"><span class="plus">+</span> Photos of completed work</div>
-                <div class="evidence-item-modal"><span class="plus">+</span> Customer reviews</div>
-                <div class="evidence-item-modal"><span class="plus">+</span> Acknowledgment of your refund policy</div>
             </div>
             <div class="evidence-section">
                 <h3>Not accepted</h3>
@@ -447,7 +439,99 @@
 
         function showEvidenceModal(event) {
             event.preventDefault();
+            
+            // First show the modal
             document.getElementById('evidenceModal').style.display = 'flex';
+            
+            try {
+                // Get current seller and dispute
+                const seller = mockSellers[sellerId];
+                const dispute = seller.disputes.open.find(d => d.id === disputeId) || 
+                              seller.disputes.history.find(d => d.id === disputeId);
+                
+                if (!seller || !dispute) {
+                    console.error('Could not find seller or dispute:', { sellerId, disputeId });
+                    return;
+                }
+                
+                // Get evidence requirements based on seller audience and dispute reason
+                const requirements = getEvidenceRequirements(seller.audience, dispute.disputeReason);
+                console.log('Seller:', seller.name);
+                console.log('Dispute reason:', dispute.disputeReason);
+                console.log('Audience:', seller.audience);
+                console.log('Evidence requirements:', JSON.stringify(requirements, null, 2));
+                
+                // Add standard supporting evidence for all disputes
+                const standardSupportingEvidence = [
+                    {
+                        type: 'text_messages',
+                        name: 'Text message or email conversations',
+                        description: 'Communication with customer',
+                        is_key: false
+                    },
+                    {
+                        type: 'customer_reviews',
+                        name: 'Customer reviews',
+                        description: 'Previous reviews or feedback',
+                        is_key: false
+                    },
+                    {
+                        type: 'refund_policy',
+                        name: 'Acknowledgment of your refund policy',
+                        description: 'Customer acceptance of terms',
+                        is_key: false
+                    }
+                ];
+                
+                // Combine and deduplicate all evidence
+                const allEvidence = {
+                    key: [],
+                    supporting: []
+                };
+                
+                // Add key evidence from square_provided
+                allEvidence.key = requirements.square_provided
+                    .filter(e => e.is_key)
+                    .reduce((acc, curr) => {
+                        if (!acc.some(e => e.type === curr.type)) {
+                            acc.push(curr);
+                        }
+                        return acc;
+                    }, []);
+                
+                // Add supporting evidence from all sources
+                const nonKeyEvidence = requirements.square_provided.filter(e => !e.is_key);
+                allEvidence.supporting = [...nonKeyEvidence, ...requirements.merchant_provided, ...standardSupportingEvidence]
+                    .reduce((acc, curr) => {
+                        if (!acc.some(e => e.type === curr.type)) {
+                            acc.push(curr);
+                        }
+                        return acc;
+                    }, []);
+                
+                console.log('Combined evidence:', JSON.stringify(allEvidence, null, 2));
+                
+                // Update key evidence section
+                const keyEvidenceHtml = allEvidence.key
+                    .map(e => `<div class="evidence-item-modal"><span class="checkmark">✓</span> ${e.name}</div>`)
+                    .join('');
+                document.getElementById('keyEvidenceSection').innerHTML = `
+                    <h3>Key evidence</h3>
+                    ${keyEvidenceHtml}
+                `;
+                
+                // Update supporting evidence section
+                const supportingEvidenceHtml = allEvidence.supporting
+                    .map(e => `<div class="evidence-item-modal"><span class="plus">+</span> ${e.name}</div>`)
+                    .join('');
+                document.getElementById('supportingEvidenceSection').innerHTML = `
+                    <h3>Supporting evidence</h3>
+                    ${supportingEvidenceHtml || '<div class="evidence-item-modal"><span class="plus">+</span> Additional context or documentation if available</div>'}
+                `;
+                
+            } catch (error) {
+                console.error('Error updating evidence modal:', error);
+            }
         }
 
         function closeEvidenceModal() {
